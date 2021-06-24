@@ -1,4 +1,4 @@
-pragma solidity ^0.4.3;
+pragma solidity ^0.6.0;
 
 contract Hello{
     uint256 public value;
