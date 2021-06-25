@@ -42,13 +42,26 @@ describe("MultiSigWallet test",function(){
         const hello = await Hello.deploy();
         await hello.deployed();
         console.log("address of hello:",hello.address);
-
-
+       
+    
         //在多签钱包添加一笔交易
         const tokenArtifact = await hre.artifacts.readArtifact("Hello");
         const payload = getPayLoad(tokenArtifact.abi,"set",233);
+        const submitTransaction = await multiSigWallet.submitTransaction(hello.address, 0, payload);
+        const transactionReceipt = await submitTransaction.wait();
+        console.log("transactionReceipt:",transactionReceipt);
 
-        await multiSigWallet.
+        
+        // await multiSigWallet.queryFilter("Submission" , transactionReceipt.blockNumber ,transactionReceipt.blockNumber)
+        // .then(e => console.log(e)).catch(err =>console.log(err));
+    
+
+        //其他参与者同意
+        // await multiSigWallet.connect(Bob).confirmTransaction(Bob.address, 50);
+
+
+
+
         // console.log("abi of hello:",tokenArtifact.abi);
 
         // const data = getPayLoad();
