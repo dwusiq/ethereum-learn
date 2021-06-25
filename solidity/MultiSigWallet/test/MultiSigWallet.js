@@ -8,16 +8,21 @@ function getPayLoad(contractABI,functionName,param){
             continue;
         }
 
+        //get sigHash of function
+        const interface = new ethers.utils.Interface(contractABI);
+        const functionSigHash = interface.getSighash(functionName);
+        console.log("sign of method:%s is %s",functionName,functionSigHash);
 
-        const iface = new ethers.utils.Interface(contractABI);
+        //encode param
+        const abiCoder =new ethers.utils.AbiCoder()
+        const codeOfParam =  abiCoder.encode(['uint256'],[param])
+        console.log("codeOfParam:",codeOfParam);
 
-        // const iface = new ethers.Interface(contractABI);
-        const abiInstance =iface.functions[functionName];
-     
-        // const abiInterface=new ethers.Interface(functionABI);
 
-        console.log("sign of method:%s is %s",functionName,abiInstance.sighash );
-        // console.log("method:%s, abi:%s",functionName,contractABI[i]);
+        //payload
+        const payload = functionSigHash + codeOfParam.substring(2,codeOfParam.length);
+        console.log("payload:",functionName,payload);
+        return payload;
     }
 }
 
@@ -41,7 +46,9 @@ describe("MultiSigWallet test",function(){
 
         //在多签钱包添加一笔交易
         const tokenArtifact = await hre.artifacts.readArtifact("Hello");
-        getPayLoad(tokenArtifact.abi,"set",1);
+        const payload = getPayLoad(tokenArtifact.abi,"set",233);
+
+        await multiSigWallet.
         // console.log("abi of hello:",tokenArtifact.abi);
 
         // const data = getPayLoad();

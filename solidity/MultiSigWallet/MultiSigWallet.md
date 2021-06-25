@@ -1,5 +1,8 @@
 # 多签钱包调研
 
+## 业务介绍
+
+
 ## 一、相关地址
 * [合约源码](https://github.com/gnosis/MultiSigWallet/tree/master/contracts)
 
@@ -92,3 +95,9 @@
  
  3. 相关参与者分别调用函数`confirmTransaction`确认这笔交易
      当交易确认者达到指定的数时，会调用`executeTransaction`触发目标交易
+
+ ## 参考链接
+
+ 1 todo  增加script  kovan 
+ 2 执行步骤
+ 
