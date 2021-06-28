@@ -1,29 +1,9 @@
 # 多签钱包调研
 
 ## 业务介绍
+多签钱包，所有参与者都可以添加一笔交易，其他的参与者可以对这笔交易投下赞成票，当赞成票达到设置值时，这笔交易会被触发。另外，参与者及最低票数都可以动态设置。
 
-
-## 一、相关地址
-* [合约源码](https://github.com/gnosis/MultiSigWallet/tree/master/contracts)
-
-
-## 二、合约解读
-> 合约地址：https://github.com/gnosis/MultiSigWallet/tree/master/contracts
-
-
-* Factory.sol
-* Migrations.sol
-* MultiSigWallet.sol
-* MultiSigWalletFactory.sol
-* MultiSigWalletWithDailyLimit.sol
-* MultiSigWalletWithDailyLimitFactory.sol
-* TestCalls.sol
-* TestToken.sol
-* 
-
-
-## MultiSigWallet.sol
-
+## `MultiSigWallet.sol`合约详情
 
 ### 函数描述
 * 构造函数
@@ -96,8 +76,24 @@
  3. 相关参与者分别调用函数`confirmTransaction`确认这笔交易
      当交易确认者达到指定的数时，会调用`executeTransaction`触发目标交易
 
+## `hardhat`中使用
+1. 在`MultiSigWallet`目录执行安装本项目依赖的命令：`npm install`
+2. 运行测试脚本：`npx hardhat test`
+3. 部署到测试链
+   * 修改配置文件`hardhat.config.js`
+      - `const INFURA_PROJECT_ID`: 在kovan中创建的项目的id
+      - `ROPSTEN_PRIVATE_KEY`：私钥（可以在matemask中导出）
+   * 运行部署脚本：`npx hardhat run scripts/deploy.js --network kovan`
+
+
  ## 参考链接
+
+1. 合约地址：https://github.com/gnosis/MultiSigWallet/tree/master/contracts
 
  1 todo  增加script  kovan 
  2 执行步骤
  
+
+
+
+ > 
