@@ -1,13 +1,13 @@
 async function main(){
-    const [Alice,Bob,David] = await ethers.getSigners();
+    const [Alice,Bob] = await ethers.getSigners();
     console.log("MultiSigWallet owner is :",Alice.address);
 
     //部署MyToken.sol
     const MultiSigWallet = await ethers.getContractFactory("MultiSigWallet");
-    const multiSigWallet = await MultiSigWallet.deploy([Alice.address,Bob.address,David.address],2);
-    await multiSigWallet.deployed();
+    const multiSigWalletReceipt = await MultiSigWallet.deploy([Alice.address,Bob.address],2);
+    await multiSigWalletReceipt.deployed();
 
-    console.log("MultiSigWallet address:", multiSigWallet.address);
+    console.log("MultiSigWallet address:", multiSigWalletReceipt.address);
 }
 
 main()
