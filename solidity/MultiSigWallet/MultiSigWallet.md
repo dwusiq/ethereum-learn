@@ -67,12 +67,12 @@
  1. 参与者之一部署多签合约`MultiSigWallet.sol`
    * 参数一：包含自己在内的参与者数组
    * 参数二：至少要达到的签名数
-   
+
  2. 其中一个参与者调用函数`submitTransaction`提交交易申请，得到一个交易id
    * 参数一：address--目标合约地址
    * 参数二：value--转让以太币数
    * 参数三：data--目标函数调用的签名值
- 
+
  3. 相关参与者分别调用函数`confirmTransaction`确认这笔交易
      当交易确认者达到指定的数时，会调用`executeTransaction`触发目标交易
 
@@ -94,15 +94,16 @@
 
 ## FAQ
 
-*Q:* 执行命令`npx hardhat test`失败
-     ```
-     PS E:\codes\github\ethereum-learn\solidity\MultiSigWallet> npx hardhat test
+**Q:** 执行命令`npx hardhat test`失败
+
+```
+PS E:\codes\github\ethereum-learn\solidity\MultiSigWallet> npx hardhat test
 CreateFile() Error: 5
 Error HH8: There's one or more errors in your config file:
 
   * Invalid value {"url":"https://ropsten.infura.io/v3/4b03c2c1c3be0462dbdc4afcfb20564a2","accounts":["0xee0a15729e7f15994bb53be716b2f52ee1217225a5211549f22c2505c6fa1bc22","0x0c0806458f61df679ea1d6e7209dc3cdc009f8d01333e1446b2ef46dd22fe6e33"]} for HardhatConfig.networks.ropsten - Expected a value of type HttpNetworkConfig.
   
 To learn more about Hardhat's configuration, please go to https://hardhat.org/config/
-     ```
+```
 
-*A:* 修改配置文件`hardhat.config.js`,把`networks`这块代码整个注释就可以了。（pass:在执行部署命令时，需要把这段注释打开）
+**A:** 修改配置文件`hardhat.config.js`,把`networks`这块代码整个注释就可以了。（pass:在执行部署命令时，需要把这段注释打开）
