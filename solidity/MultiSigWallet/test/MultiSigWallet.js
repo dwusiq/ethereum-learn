@@ -36,41 +36,31 @@ describe("MultiSigWallet test",function(){
        const createReceipt = await multiSigWallet.wait();
        console.log("createReceipt:",createReceipt.logs);
 
-
-        // //部署多签合约`MultiSigWallet.sol`
-        // const MultiSigWallet = await ethers.getContractFactory("MultiSigWallet");
-        // const multiSigWallet = await MultiSigWallet.deploy([Alice.address,Bob.address,David.address],2);
-        // await multiSigWallet.deployed();
-        // console.log("address of multiSigWallet:",multiSigWallet.address);
-
         //部署交易合约`Hello.sol`,该合约的交易只能由上面的那个合约触发
-        // const Hello = await ethers.getContractFactory("Hello");
-        // const hello = await Hello.deploy();
-        // await hello.deployed();
-        // console.log("address of hello:",hello.address);
+        const Hello = await ethers.getContractFactory("Hello");
+        const hello = await Hello.deploy();
+        await hello.deployed();
+        console.log("address of hello:",hello.address);
        
     
         //在多签钱包添加一笔交易
-        // const tokenArtifact = await hre.artifacts.readArtifact("Hello");
-        // const payload = getPayLoad(tokenArtifact.abi,"set",233);
-        // const submitTransaction = await multiSigWallet.submitTransaction(hello.address, 0, payload);
-        // const transactionReceipt = await submitTransaction.wait();
-        // console.log("transactionReceipt:",transactionReceipt);
+        const tokenArtifact = await hre.artifacts.readArtifact("Hello");
+        const payload = getPayLoad(tokenArtifact.abi,"set",555);
+        const submitTransaction = await multiSigWallet.submitTransaction(hello.address, 0, payload);
+        const transactionReceipt = await submitTransaction.wait();
+        const event = getEventByName(transactionReceipt.events,"Submission");
+        const transactionId = event.args[0].toNumber();
+        console.log("transactionId:",transactionId);
 
-        
-        // await multiSigWallet.queryFilter("Submission" , transactionReceipt.blockNumber ,transactionReceipt.blockNumber)
-        // .then(e => console.log(e)).catch(err =>console.log(err));
-    
 
         //其他参与者同意
-        // await multiSigWallet.connect(Bob).confirmTransaction(Bob.address, 50);
+        const confirmTransaction = await multiSigWallet.connect(Bob).confirmTransaction(transactionId);
+       await confirmTransaction.wait();
 
 
-
-
-        // console.log("abi of hello:",tokenArtifact.abi);
-
-        // const data = getPayLoad();
+        //调用hello合约查询结果
+        const valueOfHello = await hello.get();
+        console.log("valueOfHello:",valueOfHello.toNumber());
 
     });
 });
