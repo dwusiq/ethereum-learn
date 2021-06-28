@@ -81,19 +81,14 @@
 2. 运行测试脚本：`npx hardhat test`
 3. 部署到测试链
    * 修改配置文件`hardhat.config.js`
-      - `const INFURA_PROJECT_ID`: 在kovan中创建的项目的id
-      - `ROPSTEN_PRIVATE_KEY`：私钥（可以在matemask中导出）
-   * 运行部署脚本：`npx hardhat run scripts/deploy.js --network kovan`
+      - `const INFURA_PROJECT_ID`: 在ropsten中创建的项目的id
+      - `PRIVATE_KEY1`、`PRIVATE_KEY2`：私钥（可以在matemask中导出）
+   * 运行部署脚本：`npx hardhat run scripts/deploy.js --network rospten`
 
 
  ## 参考链接
 
 1. 合约地址：https://github.com/gnosis/MultiSigWallet/tree/master/contracts
-
- 1 todo  增加script  kovan 
- 2 执行步骤
- 
-
 
 
  > 
