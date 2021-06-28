@@ -10,10 +10,10 @@ const PRIVATE_KEY2 = "0c0806458f61df679ea1d6e7209dc3cdc009f8d01333e1446b2ef46dd2
  */
 module.exports = {
   solidity: "0.6.3",
-  networks: {
-    ropsten: {
-      url: `https://ropsten.infura.io/v3/${INFURA_PROJECT_ID}`,
-      accounts: [`0x${PRIVATE_KEY1}`,`0x${PRIVATE_KEY2}`]
-    }
-  }
+  // networks: {
+  //   ropsten: {
+  //     url: `https://ropsten.infura.io/v3/${INFURA_PROJECT_ID}`,
+  //     accounts: [`0x${PRIVATE_KEY1}`,`0x${PRIVATE_KEY2}`]
+  //   }
+  // }
 };
