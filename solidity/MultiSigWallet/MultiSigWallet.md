@@ -78,8 +78,8 @@
 
 ## `hardhat`中使用
 1. 在`MultiSigWallet`目录执行安装本项目依赖的命令：`npm install`
-2. 运行测试脚本：`npx hardhat test`
-3. 部署到测试链
+2. 运行测试脚本：`npx hardhat test` --这里可能失败，如果失败，参考下文`FAQ`
+3. 部署到其他链
    * 修改配置文件`hardhat.config.js`
       - `const INFURA_PROJECT_ID`: 在ropsten中创建的项目的id
       - `PRIVATE_KEY1`、`PRIVATE_KEY2`：私钥（可以在matemask中导出）
@@ -91,4 +91,18 @@
 1. 合约地址：https://github.com/gnosis/MultiSigWallet/tree/master/contracts
 
 
- > 
+
+## FAQ
+
+*Q:* 执行命令`npx hardhat test`失败
+     ```
+     PS E:\codes\github\ethereum-learn\solidity\MultiSigWallet> npx hardhat test
+CreateFile() Error: 5
+Error HH8: There's one or more errors in your config file:
+
+  * Invalid value {"url":"https://ropsten.infura.io/v3/4b03c2c1c3be0462dbdc4afcfb20564a2","accounts":["0xee0a15729e7f15994bb53be716b2f52ee1217225a5211549f22c2505c6fa1bc22","0x0c0806458f61df679ea1d6e7209dc3cdc009f8d01333e1446b2ef46dd22fe6e33"]} for HardhatConfig.networks.ropsten - Expected a value of type HttpNetworkConfig.
+  
+To learn more about Hardhat's configuration, please go to https://hardhat.org/config/
+     ```
+
+*A:* 修改配置文件`hardhat.config.js`,把`networks`这块代码整个注释就可以了。（pass:在执行部署命令时，需要把这段注释打开）

@@ -2,12 +2,6 @@ const {expect} = require("chai");
 
 
 function getPayLoad(contractABI,functionName,param){
-    for(let i=0;i<contractABI.length;i++){
-        const functionABI = contractABI[i];
-        if(functionName!=functionABI.name){
-            continue;
-        }
-
         //get sigHash of function
         const interface = new ethers.utils.Interface(contractABI);
         const functionSigHash = interface.getSighash(functionName);
@@ -18,12 +12,11 @@ function getPayLoad(contractABI,functionName,param){
         const codeOfParam =  abiCoder.encode(['uint256'],[param])
         console.log("codeOfParam:",codeOfParam);
 
-
         //payload
         const payload = functionSigHash + codeOfParam.substring(2,codeOfParam.length);
         console.log("payload:",functionName,payload);
+
         return payload;
-    }
 }
 
 describe("MultiSigWallet test",function(){
