@@ -88,7 +88,7 @@ describe("MultiSigWallet test",function(){
 
         //调用hello合约查询结果
         const valueOfHello = await hello.get();
-        console.log("valueOfHello:",valueOfHello.toNumber());
+        console.log("valueFromHello:",valueOfHello.toNumber());
 
     });
 });
