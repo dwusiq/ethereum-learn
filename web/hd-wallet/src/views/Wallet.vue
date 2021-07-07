@@ -11,18 +11,34 @@
     <div class="outBlock">
       <h1>场景二：校验助记词</h1>
       <textarea class="textarea" v-model="inputMmonicContent" placeholder="embody;father;fashion;lemon;sheriff;gospel;suffer;smoke;finish;bus;way;dizzy" rows="4" cols="30"></textarea>
-      <ul  v-show="validateMnemonicSuccess">
+      <!-- <ul  v-show="validateMnemonicSuccess">
         <li>私钥：{{privateKey}}</li>  
         <li>公钥：{{publicKey}} </li>
         <li>地址：{{address}}</li>
         <li>path：{{path}} </li>
-      </ul>
+      </ul> -->
+  
       <ul class="buttonBlock">
         <button class="button"  @click="validateMnemonic">校验</button>
         <button class="button"  @click="cleanInputedMnemonic">清空</button>
-        <button class="button" v-show="validateMnemonicSuccess"  @click="hideValidateMnemonicResult">隐藏</button>
+        <!-- <button class="button" v-show="validateMnemonicSuccess"  @click="hideValidateMnemonicResult">隐藏</button> -->
       </ul>
-
+    </div>
+    <div class="outBlock">
+      <h1>场景三：当前钱包信息</h1>
+      <ul  v-show="validateMnemonicSuccess">
+        <li>助记词：{{inputMmonicContent}}</li>
+        <li>私钥：{{privateKey}}</li>  
+        <li>公钥：{{publicKey}} </li>
+        <li>地址：{{address}}</li>
+        <li>种子：{{seed}}</li>
+        <li>path：{{path}} </li>
+      </ul>
+      <!-- <ul class="buttonBlock">
+        <button class="button"  @click="validateMnemonic">校验</button>
+        <button class="button"  @click="cleanInputedMnemonic">清空</button>
+        <button class="button" v-show="validateMnemonicSuccess"  @click="hideValidateMnemonicResult">隐藏</button>
+      </ul> -->
     </div>
   </div>
 </template>
@@ -46,6 +62,7 @@ export default defineComponent({
       publicKey: "",
       address: "",
       path: "",
+      seed:""
     };
   },
 
@@ -70,6 +87,7 @@ export default defineComponent({
       this.publicKey = hdNode.publicKey;
       this.address = hdNode.address;
       this.path = hdNode.path;
+      this.seed = ethers.utils.mnemonicToSeed(realMnemonicContent);
     }else{
         alert("请输入有效助记词");
     }
