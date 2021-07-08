@@ -34,11 +34,11 @@
           <tr>
             <td>父私钥初始化参数类型：</td>
             <td> 
-              <input type="radio" id="mnemonic" value="{{ParentkeyInitTypeEnum.Mnemonic}}" v-model="parentkeyInitType">
+              <input type="radio" id="mnemonic" value="0" v-model="parentkeyInitType">
               <label for="mnemonic">助记词</label>
-              <input type="radio" id="seed" value="{{ParentkeyInitTypeEnum.Seed}}" v-model="parentkeyInitType">
-              <label for="seed">随机种子</label>
-              <input type="radio" id="extendedKey" value="ExtendedKey" v-model="parentkeyInitType">
+              <input type="radio" id="seed" value="1" v-model="parentkeyInitType">
+              <label for="seed">种子</label>
+              <input type="radio" id="extendedKey" value="2" v-model="parentkeyInitType">
               <label for="extendedKey">扩展键</label>
             </td>
           </tr>
@@ -49,15 +49,44 @@
             </td>
           </tr>
           <tr>
-            <td>子私钥索引：</td>
+            <td>币种(coin)：</td>
             <td> 
-              <input type="text" v-model="subsidiaryKeyIndex" style="width:50px;"/>
+              　<select v-model="coinType" @change="buildSubNodePath">
+    　        　  <option v-for="item in coinTypeList" v-bind:key="item.value" v-bind:value="item.value">{{item.name}} - {{item.value}}</option>
+　　            </select>
             </td>
+          </tr>
+          <tr>
+            <td>账号(Account)：</td>
+            <td> 
+              　<input type="number" v-model="account" @change="buildSubNodePath" style="width:50px;"/>
+            </td>
+          </tr>
+          <tr>
+            <td>可见性(change)：</td>
+            <td> 
+              　<select v-model="changeType" @change="buildSubNodePath">
+    　        　  <option v-for="item in changeTypeList" v-bind:key="item.value" v-bind:value="item.value">{{item.name}} - {{item.value}}</option>
+　　            </select>
+            </td>
+          </tr>
+          <tr>
+            <td>地址索引(addressIndex)：</td>
+            <td> 
+              　<input type="number" v-model="addressIndex" @change="buildSubNodePath" style="width:50px;"/>
+            </td>
+          </tr>
+          <tr>
+            <td>子私钥地址：</td>
+            <td><span>{{subNodePath}}  </span></td>
           </tr>
         </table>
       </ul>
       <ul class="buttonBlock">
         <button class="button"  @click="generateSubsidiaryKey">确认</button>
+      </ul>
+      <ul>
+        子私钥地址：{{newKeyAddress}}
       </ul>
     </div>
   </div>
@@ -67,7 +96,7 @@
 
 <script lang="ts">
 import { ethers } from 'ethers';
-import { defineComponent} from 'vue'
+import { computed, defineComponent } from 'vue';
 
 
 enum ParentkeyInitTypeEnum {
@@ -97,12 +126,19 @@ export default defineComponent({
       //其他
       parentkeyInitType:"Mnemonic",
       parentkeyInitParam:"",
-      subsidiaryKeyIndex: null
+      newKeyAddress:"",    
+      coinType:"60",
+      coinTypeList:[{ name: 'BTC', value: '0' },{ name: 'ETH', value: '60' }],
+      account:"0",
+      changeType:"0",
+      changeTypeList:[{ name: '外部可见（收款地址）', value: '0' },{ name: '内部可见（找零地址）', value: '1' }],
+      addressIndex:"0",
+      subNodePath:"m/44'/60'/0'/0/0",
     };
   },
 
 
- //setup(){
+//  setup(){
 //  },  
   
   //函数在这里,就可以在模板中引用了
@@ -136,8 +172,31 @@ export default defineComponent({
    hideValidateMnemonicResult():void{
       this.validateMnemonicSuccess=false;
    },
+   buildSubNodePath():void{
+      this.subNodePath =  "m/44'/coinType'/account'/changeType/addressIndex"
+      .replace("coinType",this.coinType)
+      .replace("account",this.account)
+      .replace("changeType",this.changeType)
+      .replace("addressIndex",this.addressIndex);
+   },
    generateSubsidiaryKey():void{
-     console.log(ParentkeyInitTypeEnum.Mnemonic);
+     let parentHdNode=null;
+     if(ParentkeyInitTypeEnum.Mnemonic==this.parentkeyInitType){
+       parentHdNode = ethers.utils.HDNode.fromMnemonic(this.parentkeyInitParam);
+     }else if(ParentkeyInitTypeEnum.Seed==this.parentkeyInitType){
+       parentHdNode = ethers.utils.HDNode.fromSeed(this.parentkeyInitParam);
+     }else if(ParentkeyInitTypeEnum.ExtendedKey==this.parentkeyInitType){
+      parentHdNode = ethers.utils.HDNode.fromExtendedKey(this.parentkeyInitParam);
+     }else{
+       alert("不支持的类型");
+       return;
+     }
+
+     console.log(parentHdNode);
+     console.log(parentHdNode.derivePath("m/44'/60'/1'/4/0"));
+    //  let subsidiaryHdNode = parentHdNode.neuter().derivePath("m/44'/60'/0'/0/0");
+    //  this.newKeyAddress = subsidiaryHdNode.address;
+  //  m/44'/60'/0'/0/0 0xa14acead97951e2be70d5d305d93a37cabd474426765f7272d96fb4b452f8a31
    }
   }
 })
@@ -150,6 +209,7 @@ export default defineComponent({
   flex-direction: column;  /* 按照列column(垂直方向)排列*/
   border:10px solid rgba(4, 64, 68, 0.205);
   margin-left: 30px;
+  margin-top: 30px; 
   }
 
 .outBlock textarea{
