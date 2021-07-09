@@ -77,7 +77,7 @@
             </td>
           </tr>
           <tr>
-            <td>子私钥地址：</td>
+            <td>子私Path：</td>
             <td><span>{{subNodePath}}  </span></td>
           </tr>
         </table>
