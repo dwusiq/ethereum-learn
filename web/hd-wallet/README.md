@@ -66,3 +66,4 @@
 
 * [理解开发HD 钱包涉及的 BIP32、BIP44、BIP39](https://learnblockchain.cn/2018/09/28/hdwallet/)
 * [一文讲清楚“区块链钱包”](https://zhuanlan.zhihu.com/p/41788925)
+* [使用metamask的dapp](https://docs.metamask.io/guide/create-dapp.html#project-setup)

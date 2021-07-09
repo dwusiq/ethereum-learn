@@ -30,7 +30,7 @@
     <div class="outBlock">
       <h1>场景三：生成子私钥</h1>
       <ul>
-        <table class="generateSubsidiaryKey">
+        <table class="textShowLeft">
           <tr>
             <td>父私钥初始化参数类型：</td>
             <td> 
@@ -89,14 +89,63 @@
         子私钥地址：{{newKeyAddress}}
       </ul>
     </div>
+    <div class="outBlock">
+      <h1>场景四：随机产生私钥</h1>
+      <ul class="buttonBlock">
+        <button class="button"  @click="generateRandomPrivate">确定</button>
+      </ul>
+      <ul class="textShowLeft">
+        <li>私钥：{{randomPrivateKey}}</li>
+        <li>公钥：{{randomPublicKey}}</li>
+        <li>私钥地址：{{randomKeyAddress}}</li>
+      </ul>
+    </div>
+    <div class="outBlock">
+      <h1>场景五：部署合约</h1>
+      <ul>
+        <table class="textShowLeft">
+          <tr>
+            <td>私钥来源：</td>
+            <td> 
+              <input type="radio" id="matemask" value="0" @change="changeKeyFrom" v-model="keyFrom">
+              <label for="matemask">MateMask</label>
+              <input type="radio" id="random" value="1"  @change="changeKeyFrom" v-model="keyFrom">
+              <label for="random">随机</label>
+            </td>
+          </tr>
+          <tr>
+            <td>私钥地址：</td>
+            <td><span>{{keAddressOfDeploy}}</span></td>
+          </tr>
+          <tr>
+            <td>合约ABI：</td>
+            <td><input type="text" v-model="contractAbi"/></td>
+          </tr>
+          <tr>
+            <td>合约BIN：</td>
+            <td><input type="text" v-model="contractBin"/></td>
+          </tr>
+          <tr>
+            <td>初始化参数：</td>
+            <td><input type="text" v-model="contractInitParam"/></td>
+          </tr>
+        </table>
+      </ul>
+      <ul class="buttonBlock">
+        <button class="button"  @click="generateRandomPrivate">确定</button>
+      </ul>
+      <ul class="textShowLeft">
+        <li>合约地址：{{contractAddress}}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
 
 
 <script lang="ts">
-import { ethers } from 'ethers';
-import { computed, defineComponent } from 'vue';
+import { ethers, providers } from 'ethers';
+import { defineComponent } from 'vue';
 
 
 enum ParentkeyInitTypeEnum {
@@ -105,6 +154,10 @@ enum ParentkeyInitTypeEnum {
   ExtendedKey
 }
 
+enum KeyFromEnum{
+  MateMask,
+  Random
+}
 
 
 export default defineComponent({
@@ -134,6 +187,17 @@ export default defineComponent({
       changeTypeList:[{ name: '外部可见（收款地址）', value: '0' },{ name: '内部可见（找零地址）', value: '1' }],
       addressIndex:"0",
       subNodePath:"m/44'/60'/0'/0/0",
+      //随机私钥
+      randomPrivateKey:"",
+      randomPublicKey:"",
+      randomKeyAddress:"",
+      //deploy contract
+      keyFrom:null,
+      keAddressOfDeploy:"",
+      contractInitParam:"",
+      contractBin:"",
+      contractAbi:"",
+      contractAddress:"",
     };
   },
 
@@ -191,12 +255,35 @@ export default defineComponent({
        alert("不支持的类型");
        return;
      }
-
-  
-
-     console.log(parentHdNode);
-     console.log(parentHdNode.derivePath(this.subNodePath));
      this.newKeyAddress = parentHdNode.derivePath(this.subNodePath).address;
+   },
+   generateRandomPrivate():void{
+     const wallet = ethers.Wallet.createRandom();
+     this.randomPrivateKey = wallet.privateKey;
+     this.randomPublicKey = wallet.publicKey;
+     this.randomKeyAddress = wallet.address;
+   },changeKeyFrom():void{
+     this.keAddressOfDeploy=null;
+     if(KeyFromEnum.MateMask==this.keyFrom){
+        // if (!window.ethereum) {//用来判断你是否安装了metamask
+        //   alert('未安装MetaMask.');
+        //   return;
+        // }
+        console.log(1);
+        window.ethereum.request({ method: 'eth_accounts' }).then(res => console.log(res));
+        //  if (!provider.getSigner()) {//这个是判断你有没有登录，coinbase是你此时选择的账号
+        //       window.alert('Please activate MetaMask first.');
+        //       return;
+        //     }
+      //  const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
+      //  console.log(provider);
+     }else if(KeyFromEnum.Random==this.keyFrom){
+       const wallet = ethers.Wallet.createRandom();
+       this.keAddressOfDeploy=wallet.address;
+     }else{
+       alert("未选择私钥来源");
+     }
+    
    }
   }
 })
@@ -235,7 +322,7 @@ export default defineComponent({
   // font-family:黑体;
   font-size:30pt;
 }
-.generateSubsidiaryKey{
+.textShowLeft{
   text-align:left;
 }
 </style>
