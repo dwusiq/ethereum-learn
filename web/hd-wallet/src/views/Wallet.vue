@@ -43,7 +43,7 @@
             </td>
           </tr>
           <tr>
-             <td>父私钥初始化参数：</td>
+            <td>父私钥初始化参数：</td>
             <td> 
               <textarea class="textarea" v-model="parentkeyInitParam"  rows="2" cols="40"></textarea>
             </td>
@@ -51,29 +51,29 @@
           <tr>
             <td>币种(coin)：</td>
             <td> 
-              　<select v-model="coinType" @change="buildSubNodePath">
-    　        　  <option v-for="item in coinTypeList" v-bind:key="item.value" v-bind:value="item.value">{{item.name}} - {{item.value}}</option>
-　　            </select>
+              <select v-model="coinType" @change="buildSubNodePath">
+                <option v-for="item in coinTypeList" v-bind:key="item.value" v-bind:value="item.value">{{item.name}} - {{item.value}}</option>
+              </select>
             </td>
           </tr>
           <tr>
             <td>账号(Account)：</td>
             <td> 
-              　<input type="number" v-model="account" @change="buildSubNodePath" style="width:50px;"/>
+              <input type="number" v-model="account" @change="buildSubNodePath" style="width:50px;"/>
             </td>
           </tr>
           <tr>
             <td>可见性(change)：</td>
             <td> 
-              　<select v-model="changeType" @change="buildSubNodePath">
-    　        　  <option v-for="item in changeTypeList" v-bind:key="item.value" v-bind:value="item.value">{{item.name}} - {{item.value}}</option>
-　　            </select>
+                <select v-model="changeType" @change="buildSubNodePath">
+                  <option v-for="item in changeTypeList" v-bind:key="item.value" v-bind:value="item.value">{{item.name}} - {{item.value}}</option>
+                </select>
             </td>
           </tr>
           <tr>
             <td>地址索引(addressIndex)：</td>
             <td> 
-              　<input type="number" v-model="addressIndex" @change="buildSubNodePath" style="width:50px;"/>
+              <input type="number" v-model="addressIndex" @change="buildSubNodePath" style="width:50px;"/>
             </td>
           </tr>
           <tr>
