@@ -264,17 +264,15 @@ export default defineComponent({
      this.randomKeyAddress = wallet.address;
    },changeKeyFrom():void{
      this.keAddressOfDeploy=null;
+     //从matemask获取私钥用户
      if(KeyFromEnum.MateMask==this.keyFrom){
-        if (typeof window.ethereum == 'undefined') {
+        if (typeof ethereum == 'undefined') {
            alert('未安装MetaMask');
+           return;
         }
-        window.ethereum.request({ method: 'eth_accounts' }).then(res => console.log(res));
-        //  if (!provider.getSigner()) {//这个是判断你有没有登录，coinbase是你此时选择的账号
-        //       window.alert('Please activate MetaMask first.');
-        //       return;
-        //     }
-      //  const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
-      //  console.log(provider);
+        ethereum.request({method: 'eth_requestAccounts',})
+        .then(rsp => (this.keAddressOfDeploy=rsp[0]))
+        .catch(function(e) { alert("metask绑定失败:"+e);});
      }else if(KeyFromEnum.Random==this.keyFrom){
        const wallet = ethers.Wallet.createRandom();
        this.keAddressOfDeploy=wallet.address;
