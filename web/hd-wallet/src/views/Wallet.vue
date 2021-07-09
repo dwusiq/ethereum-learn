@@ -265,8 +265,8 @@ export default defineComponent({
    },changeKeyFrom():void{
      this.keAddressOfDeploy=null;
      if(KeyFromEnum.MateMask==this.keyFrom){
-        if (typeof window.ethereum !== 'undefined') {
-           console.log('未安装MetaMask');
+        if (typeof window.ethereum == 'undefined') {
+           alert('未安装MetaMask');
         }
         window.ethereum.request({ method: 'eth_accounts' }).then(res => console.log(res));
         //  if (!provider.getSigner()) {//这个是判断你有没有登录，coinbase是你此时选择的账号
