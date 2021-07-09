@@ -132,7 +132,7 @@
         </table>
       </ul>
       <ul class="buttonBlock">
-        <button class="button"  @click="generateRandomPrivate">确定</button>
+        <button class="button"  @click="deployContract">确定</button>
       </ul>
       <ul class="textShowLeft">
         <li>合约地址：{{contractAddress}}</li>
@@ -159,6 +159,10 @@ enum KeyFromEnum{
   Random
 }
 
+
+//  window.ethereum.on('accountsChanged', function (accounts) {
+//      this.keAddressOfDeploy = accounts[0];
+//    });  TODO
 
 export default defineComponent({
   name: 'WalletPage',
@@ -203,6 +207,7 @@ export default defineComponent({
 
 
 //  setup(){
+  
 //  },  
   
   //函数在这里,就可以在模板中引用了
@@ -266,11 +271,11 @@ export default defineComponent({
      this.keAddressOfDeploy=null;
      //从matemask获取私钥用户
      if(KeyFromEnum.MateMask==this.keyFrom){
-        if (typeof ethereum == 'undefined') {
+        if (typeof window.ethereum == 'undefined') {
            alert('未安装MetaMask');
            return;
         }
-        ethereum.request({method: 'eth_requestAccounts',})
+        window.ethereum.request({method: 'eth_requestAccounts',})
         .then(rsp => (this.keAddressOfDeploy=rsp[0]))
         .catch(function(e) { alert("metask绑定失败:"+e);});
      }else if(KeyFromEnum.Random==this.keyFrom){
@@ -279,7 +284,10 @@ export default defineComponent({
      }else{
        alert("未选择私钥来源");
      }
-    
+   },
+   //部署合约
+   deployContract():void{
+     alert(1);
    }
   }
 })
