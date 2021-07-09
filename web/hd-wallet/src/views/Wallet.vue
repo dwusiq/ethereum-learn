@@ -192,11 +192,11 @@ export default defineComponent({
        return;
      }
 
+  
+
      console.log(parentHdNode);
-     console.log(parentHdNode.derivePath("m/44'/60'/1'/4/0"));
-    //  let subsidiaryHdNode = parentHdNode.neuter().derivePath("m/44'/60'/0'/0/0");
-    //  this.newKeyAddress = subsidiaryHdNode.address;
-  //  m/44'/60'/0'/0/0 0xa14acead97951e2be70d5d305d93a37cabd474426765f7272d96fb4b452f8a31
+     console.log(parentHdNode.derivePath(this.subNodePath));
+     this.newKeyAddress = parentHdNode.derivePath(this.subNodePath).address;
    }
   }
 })
