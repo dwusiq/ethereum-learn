@@ -127,7 +127,7 @@
           </tr>
           <tr>
             <td>初始化参数：</td>
-            <td><input type="text" v-model="contractInitParam"/></td>
+            <td><input type="text" placeholder="[a,b]" v-model="contractInitParam"/></td>
           </tr>
         </table>
       </ul>
@@ -144,9 +144,8 @@
 
 
 <script lang="ts">
-import { ethers, providers } from 'ethers';
+import { ethers } from 'ethers';
 import { defineComponent } from 'vue';
-
 
 enum ParentkeyInitTypeEnum {
   Mnemonic,
@@ -198,7 +197,7 @@ export default defineComponent({
       //deploy contract
       keyFrom:null,
       keAddressOfDeploy:"",
-      contractInitParam:"",
+      contractInitParam:[],
       contractBin:"",
       contractAbi:"",
       contractAddress:"",
@@ -287,7 +286,24 @@ export default defineComponent({
    },
    //部署合约
    deployContract():void{
-     alert(1);
+     if(KeyFromEnum.MateMask != this.keyFrom){
+       alert("暂时只支持mateMask");
+     }
+    //get provider
+    const currentProvider = new ethers.providers.Web3Provider(window.ethereum);
+    const currentSigner = currentProvider.getSigner();
+
+    // The factory we use for deploying contracts
+    const contractFactory = new ethers.ContractFactory(this.contractAbi, this.contractBin, currentSigner);
+    // or ..
+    //const contract = new Contract(address, abi, signer);
+    // or...
+    // const constant = contract.connect(currentSigner);
+
+    // Deploy an instance of the contract
+    contractFactory.deploy(eval(this.contractInitParam))
+    .then(contract => this.contractAddress=contract.address)
+    .catch(err => alert(JSON.stringify(err)));
    }
   }
 })
