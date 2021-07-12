@@ -288,6 +288,7 @@ export default defineComponent({
    deployContract():void{
      if(KeyFromEnum.MateMask != this.keyFrom){
        alert("暂时只支持mateMask");
+       return;
      }
     //get provider
     const currentProvider = new ethers.providers.Web3Provider(window.ethereum);
