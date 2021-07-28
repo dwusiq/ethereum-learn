@@ -6,3 +6,6 @@ solidity/MultiSigWallet/artifacts/contracts/MultiSigWallet.sol/MultiSigWallet.db
 solidity/MultiSigWallet/artifacts/contracts/MultiSigWallet.sol/MultiSigWallet.json
 solidity/MultiSigWallet/cache/solidity-files-cache.json
 solidity/MultiSigWallet/artifacts/
+solidity/grammer/artifacts/
+solidity/grammer/cache/
+solidity/grammer/node_modules/
