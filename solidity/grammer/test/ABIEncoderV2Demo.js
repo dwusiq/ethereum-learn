@@ -6,9 +6,6 @@ const { expect } = require("chai");
         //测试参数
         const userName="Bob";
         const userAge=9;
-
-         //获取测试账号(第一个是管理员)
-         const [Owner,Alice,Bob] = await ethers.getSigners();
  
         //部署ABIEncoderDemo.sol
          const ABIEncoderV2Demo = await ethers.getContractFactory("ABIEncoderV2Demo");
