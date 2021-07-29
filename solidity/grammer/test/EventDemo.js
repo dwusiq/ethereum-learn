@@ -28,7 +28,6 @@ function getEventByName(events,eventName){
          const changeTransaction = await eventDemo.change(value);
          const transactionReceipt = await changeTransaction.wait();
          const changeCallEvent = getEventByName(transactionReceipt.events,"changeCall");
-         console.log("changeCallEvent:",changeCallEvent);
 
          const senderAddress = changeCallEvent.args[0].toString();
          const _value = changeCallEvent.args[1];

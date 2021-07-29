@@ -1,5 +1,7 @@
 //SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
+import "hardhat/console.sol";
+
 contract Storage{
 
  uint8 value;
@@ -8,6 +10,7 @@ contract Storage{
   //如果调用这个合约时传入了不存在的函数名，则进入fallback
   fallback()external{
       value=100;
+      console.log("fallback has call");
   }
   
   function set(uint8 _val)public returns(bool){
