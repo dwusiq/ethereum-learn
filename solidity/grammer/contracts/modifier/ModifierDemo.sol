@@ -1,11 +1,11 @@
 //SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
-contract ModifierTest{
+contract ModifierDemo{
     address public owner;
     uint value;
     
-    constructor()public{
+    constructor(){
         owner=msg.sender;
     }
     
