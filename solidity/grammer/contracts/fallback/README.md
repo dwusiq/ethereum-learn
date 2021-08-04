@@ -10,12 +10,12 @@
 
 
 ## 案例描述
-本案例通过`FallbackTest.sol`来调用`Storage.sol`的函数。证明调用不存在的函数时，目标合约的`fallback`函数会被触。
+本案例通过`FallbackDemo.sol`来调用`Storage.sol`的函数。证明调用不存在的函数时，目标合约的`fallback`函数会被触。
 
 ### 测试过程
 * 部署`Storage.sol`
-* 部署`FallbackTest.sol`
-* 分别调用`FallbackTest.sol`合约的`requestExistFunc`和`requestNotExistFunc`函数，观察返回值是不是等于`100`
+* 部署`FallbackDemo.sol`
+* 分别调用`FallbackDemo.sol`合约的`requestExistFunc`和`requestNotExistFunc`函数，观察返回值是不是等于`100`
 
 
 ### 合约介绍
