@@ -9,3 +9,9 @@ solidity/MultiSigWallet/artifacts/
 solidity/grammer/artifacts/
 solidity/grammer/cache/
 solidity/grammer/node_modules/
+solidity/scene(场景)/Weth/node_modules/
+solidity/scene(场景)/Weth/artifacts/
+solidity/scene(场景)/Weth/yarn.lock
+node_modules/
+solidity/scene(场景)/Weth/cache/
+yarn.lock
