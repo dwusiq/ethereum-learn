@@ -2,17 +2,17 @@ const { expect } = require("chai");
  
  describe("ReceiveDemo test",function (){
 
-     it("deploy ReceiveDemo and test function", async function() {
+     it("deploy ReceiveDemo and test fus();\n" +
+         "\n" +
+         "\n" +
+         "        //测试参数\n" +
+         "        const value=\"10.0\";\n" +
+         "      \n" +
+         "        //部署ReceiveDemo.sol\n" +
+         "         const ReceiveDemo = await ethers.getContractFactory(\"ReceiveDemo\");\n" +
+         "         const receiveDemo = await ReceiveDemo.deploy();nction", async function() {
 
-        const [Alice] = await ethers.getSigners();
-
-
-        //测试参数
-        const value="10.0";
-      
-        //部署ReceiveDemo.sol
-         const ReceiveDemo = await ethers.getContractFactory("ReceiveDemo");
-         const receiveDemo = await ReceiveDemo.deploy();
+        const [Alice] = await ethers.getSigner
          await receiveDemo.deployed();
 
         //打印合约地址

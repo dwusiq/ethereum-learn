@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 import "./IWEth.sol";
 
+import "hardhat/console.sol";
 /***
 * 通过拍卖合约简单的验证WETH的可用性。此合约没有严谨的安全控制，不能直接拿来生产使用。
 */
@@ -38,6 +39,7 @@ contract Market {
     /// @notice 竞价
     /// @param _tokenId 想购买的token
     function bid(uint256 _tokenId) public payable{
+        console.log("bid input value===%s",msg.value);
         require(Tokens[_tokenId].owner != address(0), "token not exist");
         require(bids[msg.sender] == 0, "you had already bid a token");
         require(msg.value > 0, "value can not be '0'");
@@ -75,4 +77,7 @@ contract Market {
         delete bids[Tokens[_tokenId].bidder];
         delete Balances[Tokens[_tokenId].bidder];
     }
+
+    receive() external payable {}
+    fallback() external payable {}
 }
