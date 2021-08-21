@@ -18,3 +18,5 @@ yarn.lock
 solidity/scene(场景)/ERC721/artifacts/
 solidity/scene(场景)/ERC721/yarn-error.log
 solidity/scene(场景)/ERC721/cache/solidity-files-cache.json
+solidity/scene(场景)/ERC20/artifacts/
+solidity/scene(场景)/ERC20/cache/

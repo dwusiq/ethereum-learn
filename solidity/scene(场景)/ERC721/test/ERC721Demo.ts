@@ -10,7 +10,7 @@ describe("ERC721Demo test", function () {
 
         //param
 
-        //ERC721Demo.sol
+        //ERC20Demo.sol
         const ERC721Demo = await ethers.getContractFactory("ERC721Demo");
         const eRC721Demo = await ERC721Demo.deploy();
         await eRC721Demo.deployed();
