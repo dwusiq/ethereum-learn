@@ -1,5 +1,5 @@
 {
-  "name": "Weth",
+  "name": "ERC721",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -14,8 +14,11 @@
     "hardhat": "^2.6.1",
     "hardhat-deploy": "^0.8.11",
     "hardhat-deploy-ethers": "^0.3.0-beta.10",
-    "mocha": "^9.0.3",
+    "mocha": "^9.1.0",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.0"
   }
 }

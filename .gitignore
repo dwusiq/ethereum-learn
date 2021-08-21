@@ -15,3 +15,6 @@ solidity/scene(场景)/Weth/yarn.lock
 node_modules/
 solidity/scene(场景)/Weth/cache/
 yarn.lock
+solidity/scene(场景)/ERC721/artifacts/
+solidity/scene(场景)/ERC721/yarn-error.log
+solidity/scene(场景)/ERC721/cache/solidity-files-cache.json
