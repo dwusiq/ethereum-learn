@@ -22,3 +22,5 @@ solidity/scene(场景)/ERC20/artifacts/
 solidity/scene(场景)/ERC20/cache/
 solidity/openzeppelinDemo/artifacts/
 solidity/openzeppelinDemo/cache/
+web/TheGraph-demo/hardhat-contract/artifacts/
+web/TheGraph-demo/hardhat-contract/cache/
