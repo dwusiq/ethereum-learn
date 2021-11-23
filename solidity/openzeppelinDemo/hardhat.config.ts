@@ -2,6 +2,7 @@ import {HardhatUserConfig} from 'hardhat/types';
 import '@openzeppelin/hardhat-upgrades';
 import 'hardhat-deploy';
 import 'hardhat-deploy-ethers';
+import "@nomiclabs/hardhat-web3";
 
 const config: HardhatUserConfig = {
   solidity: {
