@@ -1,4 +1,5 @@
 import {HardhatUserConfig} from 'hardhat/types';
+import '@openzeppelin/hardhat-upgrades';
 import 'hardhat-deploy';
 import 'hardhat-deploy-ethers';
 
