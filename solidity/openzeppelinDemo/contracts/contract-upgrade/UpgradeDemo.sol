@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.3;
 
 //由于不能有构造函数，因此用一个外部函数来初始化合约，Initializable用于限制函数只能被调用一次
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol"; 
