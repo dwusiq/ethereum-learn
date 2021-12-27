@@ -31,7 +31,7 @@ async function main() {
 
     //合约部署后，可以继续调用函数做一些预设置
     //Type 'SignerWithAddress' is not assignable to type 'Signer'.
-    const changeValueTrans = await deployUpgradeDemo.connect( new ethers.Signer(Owner)).changeValue(23);
+    const changeValueTrans = await deployUpgradeDemo.connect(Owner).changeValue(23);
     console.log("changeValueTrans", changeValueTrans);
     await changeValueTrans.wait();
     
