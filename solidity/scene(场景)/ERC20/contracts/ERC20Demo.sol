@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "hardhat/console.sol";
 
 /**
-* NFT合约。
+* ERC20合约。
 */
 contract ERC20Demo is ERC20, Ownable {
 
