@@ -11,6 +11,7 @@ import "hardhat/console.sol";
 //预售平台合约
 contract PresaleMarket {
     uint256 public percentDec = 10000; //价格精度（分母）
+    address public developer; //开发者地址，用于预售收款
 
     //预售期信息
     struct PresaleTerm {
@@ -24,33 +25,59 @@ contract PresaleMarket {
     }
 
     mapping(uint256 => PresaleTerm) public PresaleTermInfo;
-    
 
     /**
      * @notice 购买presaleToken
      * @param _payAmount 本次购买花费的份额
      */
-    function purchasea(uint256 _payAmount) external {}
+    function purchasea(uint256 _termId, uint256 _payAmount) external {
+        //TODO 条件判断
+
+        uint256 payout = payoutFor(_termId, _payAmount);
+        uint256 payoutWithSaleTokenDecimal = toSaleTokenDecimal(
+            _termId,
+            payout
+        );
+
+        //扣除用户费用
+        IERC20(PresaleTermInfo[_termId].payToken).transferFrom(
+            msg.sender,
+            developer,
+            _payAmount
+        );
+
+        //铸币presaleToken
+        IERC20(PresaleTermInfo[_termId].saleToken).mint(
+            msg.sender,
+            payoutWithSaleTokenDecimal
+        );
+    }
 
     /**
-     * @notice 计算指定支付份额，能得到多少saleToken份额
+     * @notice 根据支付份额，计算能得到多少saleToken份额
      * @param _termId 预售期编号
      * @param _payValue 支付的份额
+     * @return payout_ 合约应付份额
      */
-    function _payoutFor(
-        uint256 _termId,
-        uint256 _payValue
-    ) public view returns(uint256 payout_){}
+    function payoutFor(uint256 _termId, uint256 _payAmount)
+        public
+        view
+        returns (uint256 payout_)
+    {
+        uint256 salePrice = PresaleTermInfo[_termId].salePrice;
+        payout_ = _payAmount.mul(percentDec).div(salePrice);
+    }
 
     /**
      * @notice 指定预售期，将支付份额转为saleToken精度的份额
      * @param _termId 预售期编号
      * @param _payAmount 支付的份额
      */
-    function toSaleTokenDecimal(
-        uint256 _termId,
-        uint256 _payAmount
-    ) public view returns (uint256 value_) {
+    function toSaleTokenDecimal(uint256 _termId, uint256 _payAmount)
+        public
+        view
+        returns (uint256 value_)
+    {
         //1单位saleToken字面数值/1单位payToken字面数值 = saleToken精度/payToken精度 = 10**IERC20(saleToken).decimals()/10**IERC20(_token).decimals()
         //例如，saleToken精度9，payToken精度18，则1单位saleToken字面数值/1单位payToken字面数值=1e9/1e18=1/1e9, 如果payToken的amount是10*1e18,则相对应saleToken的份额=10*1e18 * 1/1e9=10*1e9;
         address saleToken = PresaleTermInfo[_termId].saleToken;
