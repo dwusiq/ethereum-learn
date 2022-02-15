@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.1;
 
-import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
-import "@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/Address.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+
 
 import "hardhat/console.sol";
 
@@ -143,7 +146,6 @@ contract PresaleToken is IERC20, Ownable {
         _balances[to] = recipientBalance.add(amount);
 
         emit Transfer(from, to, amount);
-        _afterTokenTransfer(from, to, amount);
     }
 
     function mint(address account, uint256 amount) public onlyMarket {
