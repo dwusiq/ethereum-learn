@@ -53,7 +53,7 @@ contract PresaleMarket is Ownable {
         uint256 _startTimestamp,
         uint256 _finishTimestamp
     );
-    event setDeveloper(
+    event SetDeveloper(
         address indexed _sender,
         address indexed _oldDevelover,
         address indexed _newDeveloper
@@ -78,12 +78,12 @@ contract PresaleMarket is Ownable {
 
     /**
      * @notice 发布预售期(同一时刻，只能存在一个预售中的合约)
-     * @param payToken 本期预售接收token
-     * @param saleToken 本期预售token
-     * @param salePrice 本期预售价格
-     * @param plannedSalesAmount 本次预售计划售卖saleToken总额
-     * @param startTimestamp 本次预售开始时间
-     * @param finishTimestamp 本次预售截止时间
+     * @param _payToken 本期预售接收token
+     * @param _saleToken 本期预售token
+     * @param _salePrice 本期预售价格
+     * @param _plannedSalesAmount 本次预售计划售卖saleToken总额
+     * @param _startTimestamp 本次预售开始时间
+     * @param _finishTimestamp 本次预售截止时间
      */
     function addPresaleTerm(
         address _payToken,
@@ -94,7 +94,7 @@ contract PresaleMarket is Ownable {
         uint256 _finishTimestamp
     ) external onlyOwner {
         uint256 _termId = termIdTracker.current();
-        require(!term.termActive, "term is active");
+        require(!PresaleTermInfo[_termId].termActive, "term is active");
         termIdTracker.increment();
         //添加新的预售期信息
         _termId = termIdTracker.current();
@@ -123,16 +123,16 @@ contract PresaleMarket is Ownable {
     /**
      * @notice 变更已发布的预售信息
      * @param _termId 预售期编号
-     * @param salePrice 本期预售价格
-     * @param plannedSalesAmount 本次预售计划售卖saleToken总额
-     * @param finishTimestamp 本次预售截止时间
+     * @param _salePrice 本期预售价格
+     * @param _plannedSalesAmount 本次预售计划售卖saleToken总额
+     * @param _finishTimestamp 本次预售截止时间
      */
     function setTerm(
         uint256 _termId,
         uint256 _salePrice,
         uint256 _plannedSalesAmount,
         uint256 _finishTimestamp
-    ) onlyOwner {
+    ) external onlyOwner {
         require(PresaleTermInfo[_termId].termActive, "term not active");
         PresaleTermInfo[_termId].salePrice = _salePrice;
         PresaleTermInfo[_termId].plannedSalesAmount = _plannedSalesAmount;
@@ -150,7 +150,7 @@ contract PresaleMarket is Ownable {
      * @notice 结束指定预售期
      * @param _termId 预售期编号
      */
-    function closeTerm(uint256 _termId) onlyOwner {
+    function closeTerm(uint256 _termId) external onlyOwner {
         require(PresaleTermInfo[_termId].termActive, "term not active");
         PresaleTermInfo[_termId].termActive = false;
         emit CloseTerm(msg.sender, _termId);
@@ -244,9 +244,17 @@ contract PresaleMarket is Ownable {
      * @notice 变更开发者地址
      * @param _developer 新开发者地址
      */
-    function setDeveloper(address _developer) onlyOwner {
+    function setDeveloper(address _developer) external onlyOwner {
         address oldDeveloper = developer;
         developer = _developer;
-        emit setDeveloper(msg.sender, oldDeveloper, _developer);
+        emit SetDeveloper(msg.sender, oldDeveloper, _developer);
+    }
+
+    /**
+     * @notice 查询当前预售期编号（有效编号从1开始）
+     * @return termId_ 返回当前预售期编号
+     */
+    function getCurrentTermId() external returns (uint256 termId_) {
+        return termIdTracker.current();
     }
 }
