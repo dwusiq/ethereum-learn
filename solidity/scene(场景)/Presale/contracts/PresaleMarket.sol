@@ -59,6 +59,22 @@ contract PresaleMarket is Ownable {
         address indexed _newDeveloper
     );
     event CloseTerm(address indexed _sender, uint256 indexed _termId);
+    event SetTerm(
+        address indexed _sender,
+        uint256 indexed _termId,
+        uint256 indexed _salePrice,
+        uint256 _plannedSalesAmount,
+        uint256 _finishTimestamp
+    );
+
+    /**
+     * @notice 构造函数
+     * @param _developer 开发者地址，用于接收预售付款
+     */
+    constructor(address _developer) {
+        require(address(0) != _developer, "check developer address");
+        developer = _developer;
+    }
 
     /**
      * @notice 发布预售期(同一时刻，只能存在一个预售中的合约)
@@ -100,6 +116,32 @@ contract PresaleMarket is Ownable {
             _salePrice,
             _plannedSalesAmount,
             _startTimestamp,
+            _finishTimestamp
+        );
+    }
+
+    /**
+     * @notice 变更已发布的预售信息
+     * @param _termId 预售期编号
+     * @param salePrice 本期预售价格
+     * @param plannedSalesAmount 本次预售计划售卖saleToken总额
+     * @param finishTimestamp 本次预售截止时间
+     */
+    function setTerm(
+        uint256 _termId,
+        uint256 _salePrice,
+        uint256 _plannedSalesAmount,
+        uint256 _finishTimestamp
+    ) onlyOwner {
+        require(PresaleTermInfo[_termId].termActive, "term not active");
+        PresaleTermInfo[_termId].salePrice = _salePrice;
+        PresaleTermInfo[_termId].plannedSalesAmount = _plannedSalesAmount;
+        PresaleTermInfo[_termId].finishTimestamp = _finishTimestamp;
+        emit SetTerm(
+            msg.sender,
+            _termId,
+            _salePrice,
+            _plannedSalesAmount,
             _finishTimestamp
         );
     }
