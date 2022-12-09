@@ -1,0 +1,1421 @@
+{
+  "version": "3.2",
+  "log": [
+    {
+      "ArrayUtils": {
+        "src": "contracts\\ArrayUtils.sol:4",
+        "version": {
+          "withMetadata": "9822163f3237b5d4cd76e50ee5df437c645b5499156af0f88111be86b91e17d1",
+          "withoutMetadata": "6784c9bdde3ddff1c688b77760f8abee60b5ea4939b980505024050460e92688",
+          "linkedWithoutMetadata": "6784c9bdde3ddff1c688b77760f8abee60b5ea4939b980505024050460e92688"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "AuthenticatedProxy": {
+        "src": "contracts\\AuthenticatedProxy.sol:6",
+        "version": {
+          "withMetadata": "52c405bba820c9a51019bb8f31fe23d07fdea978c62327eed49b8d298155144b",
+          "withoutMetadata": "aeff126d1fdbff27029c1ec9bbf88847d77c9f25f9bb4b3459c181f086b1d577",
+          "linkedWithoutMetadata": "aeff126d1fdbff27029c1ec9bbf88847d77c9f25f9bb4b3459c181f086b1d577"
+        },
+        "inherit": [
+          "OwnedUpgradeabilityStorage",
+          "TokenRecipient"
+        ],
+        "libraries": [],
+        "methods": [
+          "initialize(address,address)",
+          "setRevoke(bool)",
+          "proxy(address,uint8,bytes)",
+          "proxyAssert(address,uint8,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "contracts\\AuthenticatedProxy.sol:72"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "initialized",
+            "src": "contracts\\AuthenticatedProxy.sol:9"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "AuthenticatedProxy",
+              "label": "initialized",
+              "type": "t_bool",
+              "src": "contracts\\AuthenticatedProxy.sol:9"
+            },
+            {
+              "contract": "AuthenticatedProxy",
+              "label": "user",
+              "type": "t_address",
+              "src": "contracts\\AuthenticatedProxy.sol:12"
+            },
+            {
+              "contract": "AuthenticatedProxy",
+              "label": "registry",
+              "type": "t_contract(ProxyRegistry)4545",
+              "src": "contracts\\AuthenticatedProxy.sol:15"
+            },
+            {
+              "contract": "AuthenticatedProxy",
+              "label": "revoked",
+              "type": "t_bool",
+              "src": "contracts\\AuthenticatedProxy.sol:18"
+            }
+          ],
+          "types": {
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_contract(ProxyRegistry)4545": {
+              "label": "contract ProxyRegistry"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "ERC20": {
+        "src": "contracts\\ERC20.sol:5",
+        "inherit": [
+          "ERC20Basic"
+        ],
+        "libraries": [],
+        "methods": [
+          "allowance(address,address)",
+          "transferFrom(address,address,uint256)",
+          "approve(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "ERC20Basic": {
+        "src": "contracts\\ERC20Basic.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "Exchange": {
+        "src": "contracts\\Exchange.sol:5",
+        "version": {
+          "withMetadata": "1e0f1f59b944f0f0a5eed303dec84ff28828b983224bf5b484e76f4b3d18c006",
+          "withoutMetadata": "1e0f1f59b944f0f0a5eed303dec84ff28828b983224bf5b484e76f4b3d18c006",
+          "linkedWithoutMetadata": "1e0f1f59b944f0f0a5eed303dec84ff28828b983224bf5b484e76f4b3d18c006"
+        },
+        "inherit": [
+          "ExchangeCore",
+          "Ownable",
+          "ReentrancyGuarded"
+        ],
+        "libraries": [
+          "ArrayUtils",
+          "SaleKindInterface"
+        ],
+        "methods": [
+          "guardedArrayReplace(bytes,bytes,bytes)",
+          "calculateFinalPrice(uint8,uint8,uint256,uint256,uint256,uint256)",
+          "hashOrder_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes)",
+          "hashToSign_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes)",
+          "validateOrderParameters_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes)",
+          "validateOrder_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes,uint8,bytes32,bytes32)",
+          "approveOrder_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes,bool)",
+          "cancelOrder_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes,uint8,bytes32,bytes32)",
+          "cancelOrderWithNonce_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes,uint8,bytes32,bytes32,uint256)",
+          "calculateCurrentPrice_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes)",
+          "ordersCanMatch_(address[14],uint256[18],uint8[8],bytes,bytes,bytes,bytes,bytes,bytes)",
+          "orderCalldataCanMatch(bytes,bytes,bytes,bytes)",
+          "calculateMatchPrice_(address[14],uint256[18],uint8[8],bytes,bytes,bytes,bytes,bytes,bytes)",
+          "atomicMatch_(address[14],uint256[18],uint8[8],bytes,bytes,bytes,bytes,bytes,bytes,uint8[2],bytes32[5])"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "ExchangeCore": {
+        "src": "contracts\\ExchangeCore.sol:15",
+        "version": {
+          "withMetadata": "e4e37909fe18e3280e9ae021914a1478ba7e687eed3e203a2901c622ab1d9a02",
+          "withoutMetadata": "e4e37909fe18e3280e9ae021914a1478ba7e687eed3e203a2901c622ab1d9a02",
+          "linkedWithoutMetadata": "e4e37909fe18e3280e9ae021914a1478ba7e687eed3e203a2901c622ab1d9a02"
+        },
+        "inherit": [
+          "Ownable",
+          "ReentrancyGuarded"
+        ],
+        "libraries": [
+          "ArrayUtils",
+          "SaleKindInterface",
+          "SafeMath"
+        ],
+        "methods": [
+          "()",
+          "incrementNonce()",
+          "changeMinimumMakerProtocolFee(uint256)",
+          "changeMinimumTakerProtocolFee(uint256)",
+          "changeProtocolFeeRecipient(address)",
+          "staticCall(address,bytes,bytes)",
+          "approvedOrders(bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "state-variable-assignment",
+            "name": "minimumMakerProtocolFee",
+            "src": "contracts\\ExchangeCore.sol:59"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "minimumTakerProtocolFee",
+            "src": "contracts\\ExchangeCore.sol:62"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ExchangeCore",
+              "label": "exchangeToken",
+              "type": "t_contract(ERC20)427",
+              "src": "contracts\\ExchangeCore.sol:37"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "registry",
+              "type": "t_contract(ProxyRegistry)4545",
+              "src": "contracts\\ExchangeCore.sol:40"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "tokenTransferProxy",
+              "type": "t_contract(TokenTransferProxy)4891",
+              "src": "contracts\\ExchangeCore.sol:43"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "cancelledOrFinalized",
+              "type": "t_mapping(t_bytes32,t_bool)",
+              "src": "contracts\\ExchangeCore.sol:46"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "_approvedOrdersByNonce",
+              "type": "t_mapping(t_bytes32,t_uint256)",
+              "src": "contracts\\ExchangeCore.sol:50"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "nonces",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "contracts\\ExchangeCore.sol:56"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "minimumMakerProtocolFee",
+              "type": "t_uint256",
+              "src": "contracts\\ExchangeCore.sol:59"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "minimumTakerProtocolFee",
+              "type": "t_uint256",
+              "src": "contracts\\ExchangeCore.sol:62"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "protocolFeeRecipient",
+              "type": "t_address",
+              "src": "contracts\\ExchangeCore.sol:65"
+            }
+          ],
+          "types": {
+            "t_contract(ERC20)427": {
+              "label": "contract ERC20"
+            },
+            "t_contract(ProxyRegistry)4545": {
+              "label": "contract ProxyRegistry"
+            },
+            "t_contract(TokenTransferProxy)4891": {
+              "label": "contract TokenTransferProxy"
+            },
+            "t_mapping(t_bytes32,t_bool)": {
+              "label": "mapping(bytes32 => bool)"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)"
+            },
+            "t_address": {
+              "label": "address"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "Ownable": {
+        "src": "contracts\\Ownable.sol:5",
+        "version": {
+          "withMetadata": "c6d36afc80608084aef521069517d93719bf8c155eabcccc2aea5e6759f8c73d",
+          "withoutMetadata": "65cca20239ba56d26ecfd0b5ba435f124cd5e2cefe1bbc15536ad1107980490a",
+          "linkedWithoutMetadata": "65cca20239ba56d26ecfd0b5ba435f124cd5e2cefe1bbc15536ad1107980490a"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "()",
+          "transferOwnership(address)",
+          "renounceOwnership()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "contract": "Ownable",
+              "label": "owner",
+              "type": "t_address",
+              "src": "contracts\\Ownable.sol:6"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "OwnableDelegateProxy": {
+        "src": "contracts\\OwnableDelegateProxy.sol:6",
+        "version": {
+          "withMetadata": "90fa97101a7aec95bd9b726dd0cf857b420ec66c9c1f00b457e0c34d7a35e708",
+          "withoutMetadata": "6e3cd71dc7e317490acf71cde720df6bbcc01412f382a4249bead2ce7b8bb1d4",
+          "linkedWithoutMetadata": "6e3cd71dc7e317490acf71cde720df6bbcc01412f382a4249bead2ce7b8bb1d4"
+        },
+        "inherit": [
+          "OwnedUpgradeabilityProxy",
+          "OwnedUpgradeabilityStorage",
+          "Proxy"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "contracts\\OwnableDelegateProxy.sol:13"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "OwnedUpgradeabilityProxy": {
+        "src": "contracts\\OwnedUpgradeabilityProxy.sol:7",
+        "version": {
+          "withMetadata": "05ac606665f69a1318e474ae19cfaf1d48dec655c9d268b54617fcf4f002c7c9",
+          "withoutMetadata": "e48af21e510e6bd1b82444c9d63928dbef42b4ef6249637f67b23a4626545791",
+          "linkedWithoutMetadata": "e48af21e510e6bd1b82444c9d63928dbef42b4ef6249637f67b23a4626545791"
+        },
+        "inherit": [
+          "OwnedUpgradeabilityStorage",
+          "Proxy"
+        ],
+        "libraries": [],
+        "methods": [
+          "proxyOwner()",
+          "transferProxyOwnership(address)",
+          "upgradeTo(address)",
+          "upgradeToAndCall(address,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "contracts\\OwnedUpgradeabilityProxy.sol:74"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "OwnedUpgradeabilityStorage": {
+        "src": "contracts\\OwnedUpgradeabilityStorage.sol:4",
+        "version": {
+          "withMetadata": "6d939983e080a745c78400bb28e8ea82a2bfbd9572edf69301b700601974114f",
+          "withoutMetadata": "b6e6dad20be00177b18461281b11aec864a03f41fb7e49057be086fcd9f63222",
+          "linkedWithoutMetadata": "b6e6dad20be00177b18461281b11aec864a03f41fb7e49057be086fcd9f63222"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "upgradeabilityOwner()",
+          "implementation()",
+          "proxyType()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "contract": "OwnedUpgradeabilityStorage",
+              "label": "_implementation",
+              "type": "t_address",
+              "src": "contracts\\OwnedUpgradeabilityStorage.sol:7"
+            },
+            {
+              "contract": "OwnedUpgradeabilityStorage",
+              "label": "_upgradeabilityOwner",
+              "type": "t_address",
+              "src": "contracts\\OwnedUpgradeabilityStorage.sol:10"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "Proxy": {
+        "src": "contracts\\Proxy.sol:3",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "implementation()",
+          "proxyType()",
+          "()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "ProxyRegistry": {
+        "src": "contracts\\ProxyRegistry.sol:6",
+        "version": {
+          "withMetadata": "f7285ae3b97d7e996e1a5a6c4a3ba56af657747016b58cebcde3c9a41614ffdc",
+          "withoutMetadata": "6ca5fd993cbf0cde47102d2f5432c053b7d2ca6a8d7df3af87e87c27d1bbbb0d",
+          "linkedWithoutMetadata": "6ca5fd993cbf0cde47102d2f5432c053b7d2ca6a8d7df3af87e87c27d1bbbb0d"
+        },
+        "inherit": [
+          "Ownable"
+        ],
+        "libraries": [],
+        "methods": [
+          "startGrantAuthentication(address)",
+          "endGrantAuthentication(address)",
+          "revokeAuthentication(address)",
+          "registerProxy()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "state-variable-assignment",
+            "name": "DELAY_PERIOD",
+            "src": "contracts\\ProxyRegistry.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ProxyRegistry",
+              "label": "delegateProxyImplementation",
+              "type": "t_address",
+              "src": "contracts\\ProxyRegistry.sol:8"
+            },
+            {
+              "contract": "ProxyRegistry",
+              "label": "proxies",
+              "type": "t_mapping(t_address,t_contract(OwnableDelegateProxy)4200)",
+              "src": "contracts\\ProxyRegistry.sol:11"
+            },
+            {
+              "contract": "ProxyRegistry",
+              "label": "pending",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "contracts\\ProxyRegistry.sol:14"
+            },
+            {
+              "contract": "ProxyRegistry",
+              "label": "contracts",
+              "type": "t_mapping(t_address,t_bool)",
+              "src": "contracts\\ProxyRegistry.sol:17"
+            },
+            {
+              "contract": "ProxyRegistry",
+              "label": "DELAY_PERIOD",
+              "type": "t_uint256",
+              "src": "contracts\\ProxyRegistry.sol:24"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address"
+            },
+            "t_mapping(t_address,t_contract(OwnableDelegateProxy)4200)": {
+              "label": "mapping(address => contract OwnableDelegateProxy)"
+            },
+            "t_contract(OwnableDelegateProxy)4200": {
+              "label": "contract OwnableDelegateProxy"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "ReentrancyGuarded": {
+        "src": "contracts\\ReentrancyGuarded.sol:4",
+        "version": {
+          "withMetadata": "f6e51e0348e1fdb89a2746ee5b3ab0f3beb0b0e409ef5ca7055c5c556f296a31",
+          "withoutMetadata": "e99933f7e5e2ca19009ab4d9ed5b449d53164e6fa10930880d02256b484ac085",
+          "linkedWithoutMetadata": "e99933f7e5e2ca19009ab4d9ed5b449d53164e6fa10930880d02256b484ac085"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "state-variable-assignment",
+            "name": "reentrancyLock",
+            "src": "contracts\\ReentrancyGuarded.sol:6"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ReentrancyGuarded",
+              "label": "reentrancyLock",
+              "type": "t_bool",
+              "src": "contracts\\ReentrancyGuarded.sol:6"
+            }
+          ],
+          "types": {
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "SafeMath": {
+        "src": "contracts\\SafeMath.sol:7",
+        "version": {
+          "withMetadata": "ef3c12f28e17a976b92bdddf28846e10962aa37f039d1736ff893d53c88a6405",
+          "withoutMetadata": "6784c9bdde3ddff1c688b77760f8abee60b5ea4939b980505024050460e92688",
+          "linkedWithoutMetadata": "6784c9bdde3ddff1c688b77760f8abee60b5ea4939b980505024050460e92688"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "SaleKindInterface": {
+        "src": "contracts\\SaleKindInterface.sol:5",
+        "version": {
+          "withMetadata": "4b7a0f1c162d2c5e7a5c460bd2582b8273551944324a8bac55f5ed0758e53a08",
+          "withoutMetadata": "6784c9bdde3ddff1c688b77760f8abee60b5ea4939b980505024050460e92688",
+          "linkedWithoutMetadata": "6784c9bdde3ddff1c688b77760f8abee60b5ea4939b980505024050460e92688"
+        },
+        "inherit": [],
+        "libraries": [
+          "SafeMath"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "TokenRecipient": {
+        "src": "contracts\\TokenRecipient.sol:5",
+        "version": {
+          "withMetadata": "228483af7b453f4057ddc879124824a79b3c70bb88f3ef993332fa92ed635f57",
+          "withoutMetadata": "480167b026cb95d580eed22ae0256d022433e9a44ffa54ee9996880a14820be3",
+          "linkedWithoutMetadata": "480167b026cb95d580eed22ae0256d022433e9a44ffa54ee9996880a14820be3"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "receiveApproval(address,uint256,address,bytes)",
+          "()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "TokenTransferProxy": {
+        "src": "contracts\\TokenTransferProxy.sol:6",
+        "version": {
+          "withMetadata": "5b04e66c2287e394b7b3ad69295d567264f66027edcf60e7d102a2b099d396c9",
+          "withoutMetadata": "6717d800ed14486294bca0185b31a63556e4f745d5b251b013e3a566f606a431",
+          "linkedWithoutMetadata": "6717d800ed14486294bca0185b31a63556e4f745d5b251b013e3a566f606a431"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "transferFrom(address,address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "contract": "TokenTransferProxy",
+              "label": "registry",
+              "type": "t_contract(ProxyRegistry)4545",
+              "src": "contracts\\TokenTransferProxy.sol:9"
+            }
+          ],
+          "types": {
+            "t_contract(ProxyRegistry)4545": {
+              "label": "contract ProxyRegistry"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "WyvernExchangeWithBulkCancellations": {
+        "src": "contracts\\WyvernExchangeWithBulkCancellations.sol:8",
+        "version": {
+          "withMetadata": "e7672f4a015c901fb19d651d08ff2bfbb0b367059345379ff31b2799871e60c3",
+          "withoutMetadata": "e7672f4a015c901fb19d651d08ff2bfbb0b367059345379ff31b2799871e60c3",
+          "linkedWithoutMetadata": "e7672f4a015c901fb19d651d08ff2bfbb0b367059345379ff31b2799871e60c3"
+        },
+        "inherit": [
+          "Exchange",
+          "ExchangeCore",
+          "Ownable",
+          "ReentrancyGuarded"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address,address,address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      }
+    },
+    {
+      "ArrayUtils": {
+        "src": "contracts\\ArrayUtils.sol:4",
+        "version": {
+          "withMetadata": "9822163f3237b5d4cd76e50ee5df437c645b5499156af0f88111be86b91e17d1",
+          "withoutMetadata": "6784c9bdde3ddff1c688b77760f8abee60b5ea4939b980505024050460e92688",
+          "linkedWithoutMetadata": "6784c9bdde3ddff1c688b77760f8abee60b5ea4939b980505024050460e92688"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "AuthenticatedProxy": {
+        "src": "contracts\\AuthenticatedProxy.sol:6",
+        "version": {
+          "withMetadata": "52c405bba820c9a51019bb8f31fe23d07fdea978c62327eed49b8d298155144b",
+          "withoutMetadata": "aeff126d1fdbff27029c1ec9bbf88847d77c9f25f9bb4b3459c181f086b1d577",
+          "linkedWithoutMetadata": "aeff126d1fdbff27029c1ec9bbf88847d77c9f25f9bb4b3459c181f086b1d577"
+        },
+        "inherit": [
+          "OwnedUpgradeabilityStorage",
+          "TokenRecipient"
+        ],
+        "libraries": [],
+        "methods": [
+          "initialize(address,address)",
+          "setRevoke(bool)",
+          "proxy(address,uint8,bytes)",
+          "proxyAssert(address,uint8,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "contracts\\AuthenticatedProxy.sol:72"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "initialized",
+            "src": "contracts\\AuthenticatedProxy.sol:9"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "AuthenticatedProxy",
+              "label": "initialized",
+              "type": "t_bool",
+              "src": "contracts\\AuthenticatedProxy.sol:9"
+            },
+            {
+              "contract": "AuthenticatedProxy",
+              "label": "user",
+              "type": "t_address",
+              "src": "contracts\\AuthenticatedProxy.sol:12"
+            },
+            {
+              "contract": "AuthenticatedProxy",
+              "label": "registry",
+              "type": "t_contract(ProxyRegistry)4545",
+              "src": "contracts\\AuthenticatedProxy.sol:15"
+            },
+            {
+              "contract": "AuthenticatedProxy",
+              "label": "revoked",
+              "type": "t_bool",
+              "src": "contracts\\AuthenticatedProxy.sol:18"
+            }
+          ],
+          "types": {
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_contract(ProxyRegistry)4545": {
+              "label": "contract ProxyRegistry"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "ERC20": {
+        "src": "contracts\\ERC20.sol:5",
+        "inherit": [
+          "ERC20Basic"
+        ],
+        "libraries": [],
+        "methods": [
+          "allowance(address,address)",
+          "transferFrom(address,address,uint256)",
+          "approve(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "ERC20Basic": {
+        "src": "contracts\\ERC20Basic.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "Exchange": {
+        "src": "contracts\\Exchange.sol:5",
+        "version": {
+          "withMetadata": "1e0f1f59b944f0f0a5eed303dec84ff28828b983224bf5b484e76f4b3d18c006",
+          "withoutMetadata": "1e0f1f59b944f0f0a5eed303dec84ff28828b983224bf5b484e76f4b3d18c006",
+          "linkedWithoutMetadata": "1e0f1f59b944f0f0a5eed303dec84ff28828b983224bf5b484e76f4b3d18c006"
+        },
+        "inherit": [
+          "ExchangeCore",
+          "Ownable",
+          "ReentrancyGuarded"
+        ],
+        "libraries": [
+          "ArrayUtils",
+          "SaleKindInterface"
+        ],
+        "methods": [
+          "guardedArrayReplace(bytes,bytes,bytes)",
+          "calculateFinalPrice(uint8,uint8,uint256,uint256,uint256,uint256)",
+          "hashOrder_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes)",
+          "hashToSign_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes)",
+          "validateOrderParameters_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes)",
+          "validateOrder_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes,uint8,bytes32,bytes32)",
+          "approveOrder_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes,bool)",
+          "cancelOrder_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes,uint8,bytes32,bytes32)",
+          "cancelOrderWithNonce_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes,uint8,bytes32,bytes32,uint256)",
+          "calculateCurrentPrice_(address[7],uint256[9],uint8,uint8,uint8,uint8,bytes,bytes,bytes)",
+          "ordersCanMatch_(address[14],uint256[18],uint8[8],bytes,bytes,bytes,bytes,bytes,bytes)",
+          "orderCalldataCanMatch(bytes,bytes,bytes,bytes)",
+          "calculateMatchPrice_(address[14],uint256[18],uint8[8],bytes,bytes,bytes,bytes,bytes,bytes)",
+          "atomicMatch_(address[14],uint256[18],uint8[8],bytes,bytes,bytes,bytes,bytes,bytes,uint8[2],bytes32[5])"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "ExchangeCore": {
+        "src": "contracts\\ExchangeCore.sol:15",
+        "version": {
+          "withMetadata": "e4e37909fe18e3280e9ae021914a1478ba7e687eed3e203a2901c622ab1d9a02",
+          "withoutMetadata": "e4e37909fe18e3280e9ae021914a1478ba7e687eed3e203a2901c622ab1d9a02",
+          "linkedWithoutMetadata": "e4e37909fe18e3280e9ae021914a1478ba7e687eed3e203a2901c622ab1d9a02"
+        },
+        "inherit": [
+          "Ownable",
+          "ReentrancyGuarded"
+        ],
+        "libraries": [
+          "ArrayUtils",
+          "SaleKindInterface",
+          "SafeMath"
+        ],
+        "methods": [
+          "()",
+          "incrementNonce()",
+          "changeMinimumMakerProtocolFee(uint256)",
+          "changeMinimumTakerProtocolFee(uint256)",
+          "changeProtocolFeeRecipient(address)",
+          "staticCall(address,bytes,bytes)",
+          "approvedOrders(bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "state-variable-assignment",
+            "name": "minimumMakerProtocolFee",
+            "src": "contracts\\ExchangeCore.sol:59"
+          },
+          {
+            "kind": "state-variable-assignment",
+            "name": "minimumTakerProtocolFee",
+            "src": "contracts\\ExchangeCore.sol:62"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ExchangeCore",
+              "label": "exchangeToken",
+              "type": "t_contract(ERC20)427",
+              "src": "contracts\\ExchangeCore.sol:37"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "registry",
+              "type": "t_contract(ProxyRegistry)4545",
+              "src": "contracts\\ExchangeCore.sol:40"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "tokenTransferProxy",
+              "type": "t_contract(TokenTransferProxy)4891",
+              "src": "contracts\\ExchangeCore.sol:43"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "cancelledOrFinalized",
+              "type": "t_mapping(t_bytes32,t_bool)",
+              "src": "contracts\\ExchangeCore.sol:46"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "_approvedOrdersByNonce",
+              "type": "t_mapping(t_bytes32,t_uint256)",
+              "src": "contracts\\ExchangeCore.sol:50"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "nonces",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "contracts\\ExchangeCore.sol:56"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "minimumMakerProtocolFee",
+              "type": "t_uint256",
+              "src": "contracts\\ExchangeCore.sol:59"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "minimumTakerProtocolFee",
+              "type": "t_uint256",
+              "src": "contracts\\ExchangeCore.sol:62"
+            },
+            {
+              "contract": "ExchangeCore",
+              "label": "protocolFeeRecipient",
+              "type": "t_address",
+              "src": "contracts\\ExchangeCore.sol:65"
+            }
+          ],
+          "types": {
+            "t_contract(ERC20)427": {
+              "label": "contract ERC20"
+            },
+            "t_contract(ProxyRegistry)4545": {
+              "label": "contract ProxyRegistry"
+            },
+            "t_contract(TokenTransferProxy)4891": {
+              "label": "contract TokenTransferProxy"
+            },
+            "t_mapping(t_bytes32,t_bool)": {
+              "label": "mapping(bytes32 => bool)"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)"
+            },
+            "t_address": {
+              "label": "address"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "Ownable": {
+        "src": "contracts\\Ownable.sol:5",
+        "version": {
+          "withMetadata": "c6d36afc80608084aef521069517d93719bf8c155eabcccc2aea5e6759f8c73d",
+          "withoutMetadata": "65cca20239ba56d26ecfd0b5ba435f124cd5e2cefe1bbc15536ad1107980490a",
+          "linkedWithoutMetadata": "65cca20239ba56d26ecfd0b5ba435f124cd5e2cefe1bbc15536ad1107980490a"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "()",
+          "transferOwnership(address)",
+          "renounceOwnership()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "contract": "Ownable",
+              "label": "owner",
+              "type": "t_address",
+              "src": "contracts\\Ownable.sol:6"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "OwnableDelegateProxy": {
+        "src": "contracts\\OwnableDelegateProxy.sol:6",
+        "version": {
+          "withMetadata": "90fa97101a7aec95bd9b726dd0cf857b420ec66c9c1f00b457e0c34d7a35e708",
+          "withoutMetadata": "6e3cd71dc7e317490acf71cde720df6bbcc01412f382a4249bead2ce7b8bb1d4",
+          "linkedWithoutMetadata": "6e3cd71dc7e317490acf71cde720df6bbcc01412f382a4249bead2ce7b8bb1d4"
+        },
+        "inherit": [
+          "OwnedUpgradeabilityProxy",
+          "OwnedUpgradeabilityStorage",
+          "Proxy"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "contracts\\OwnableDelegateProxy.sol:13"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "OwnedUpgradeabilityProxy": {
+        "src": "contracts\\OwnedUpgradeabilityProxy.sol:7",
+        "version": {
+          "withMetadata": "05ac606665f69a1318e474ae19cfaf1d48dec655c9d268b54617fcf4f002c7c9",
+          "withoutMetadata": "e48af21e510e6bd1b82444c9d63928dbef42b4ef6249637f67b23a4626545791",
+          "linkedWithoutMetadata": "e48af21e510e6bd1b82444c9d63928dbef42b4ef6249637f67b23a4626545791"
+        },
+        "inherit": [
+          "OwnedUpgradeabilityStorage",
+          "Proxy"
+        ],
+        "libraries": [],
+        "methods": [
+          "proxyOwner()",
+          "transferProxyOwnership(address)",
+          "upgradeTo(address)",
+          "upgradeToAndCall(address,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "contracts\\OwnedUpgradeabilityProxy.sol:74"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "OwnedUpgradeabilityStorage": {
+        "src": "contracts\\OwnedUpgradeabilityStorage.sol:4",
+        "version": {
+          "withMetadata": "6d939983e080a745c78400bb28e8ea82a2bfbd9572edf69301b700601974114f",
+          "withoutMetadata": "b6e6dad20be00177b18461281b11aec864a03f41fb7e49057be086fcd9f63222",
+          "linkedWithoutMetadata": "b6e6dad20be00177b18461281b11aec864a03f41fb7e49057be086fcd9f63222"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "upgradeabilityOwner()",
+          "implementation()",
+          "proxyType()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "contract": "OwnedUpgradeabilityStorage",
+              "label": "_implementation",
+              "type": "t_address",
+              "src": "contracts\\OwnedUpgradeabilityStorage.sol:7"
+            },
+            {
+              "contract": "OwnedUpgradeabilityStorage",
+              "label": "_upgradeabilityOwner",
+              "type": "t_address",
+              "src": "contracts\\OwnedUpgradeabilityStorage.sol:10"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "Proxy": {
+        "src": "contracts\\Proxy.sol:3",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "implementation()",
+          "proxyType()",
+          "()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "ProxyRegistry": {
+        "src": "contracts\\ProxyRegistry.sol:6",
+        "version": {
+          "withMetadata": "f7285ae3b97d7e996e1a5a6c4a3ba56af657747016b58cebcde3c9a41614ffdc",
+          "withoutMetadata": "6ca5fd993cbf0cde47102d2f5432c053b7d2ca6a8d7df3af87e87c27d1bbbb0d",
+          "linkedWithoutMetadata": "6ca5fd993cbf0cde47102d2f5432c053b7d2ca6a8d7df3af87e87c27d1bbbb0d"
+        },
+        "inherit": [
+          "Ownable"
+        ],
+        "libraries": [],
+        "methods": [
+          "startGrantAuthentication(address)",
+          "endGrantAuthentication(address)",
+          "revokeAuthentication(address)",
+          "registerProxy()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "state-variable-assignment",
+            "name": "DELAY_PERIOD",
+            "src": "contracts\\ProxyRegistry.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ProxyRegistry",
+              "label": "delegateProxyImplementation",
+              "type": "t_address",
+              "src": "contracts\\ProxyRegistry.sol:8"
+            },
+            {
+              "contract": "ProxyRegistry",
+              "label": "proxies",
+              "type": "t_mapping(t_address,t_contract(OwnableDelegateProxy)4200)",
+              "src": "contracts\\ProxyRegistry.sol:11"
+            },
+            {
+              "contract": "ProxyRegistry",
+              "label": "pending",
+              "type": "t_mapping(t_address,t_uint256)",
+              "src": "contracts\\ProxyRegistry.sol:14"
+            },
+            {
+              "contract": "ProxyRegistry",
+              "label": "contracts",
+              "type": "t_mapping(t_address,t_bool)",
+              "src": "contracts\\ProxyRegistry.sol:17"
+            },
+            {
+              "contract": "ProxyRegistry",
+              "label": "DELAY_PERIOD",
+              "type": "t_uint256",
+              "src": "contracts\\ProxyRegistry.sol:24"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address"
+            },
+            "t_mapping(t_address,t_contract(OwnableDelegateProxy)4200)": {
+              "label": "mapping(address => contract OwnableDelegateProxy)"
+            },
+            "t_contract(OwnableDelegateProxy)4200": {
+              "label": "contract OwnableDelegateProxy"
+            },
+            "t_mapping(t_address,t_uint256)": {
+              "label": "mapping(address => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "ReentrancyGuarded": {
+        "src": "contracts\\ReentrancyGuarded.sol:4",
+        "version": {
+          "withMetadata": "f6e51e0348e1fdb89a2746ee5b3ab0f3beb0b0e409ef5ca7055c5c556f296a31",
+          "withoutMetadata": "e99933f7e5e2ca19009ab4d9ed5b449d53164e6fa10930880d02256b484ac085",
+          "linkedWithoutMetadata": "e99933f7e5e2ca19009ab4d9ed5b449d53164e6fa10930880d02256b484ac085"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "state-variable-assignment",
+            "name": "reentrancyLock",
+            "src": "contracts\\ReentrancyGuarded.sol:6"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ReentrancyGuarded",
+              "label": "reentrancyLock",
+              "type": "t_bool",
+              "src": "contracts\\ReentrancyGuarded.sol:6"
+            }
+          ],
+          "types": {
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "SafeMath": {
+        "src": "contracts\\SafeMath.sol:7",
+        "version": {
+          "withMetadata": "ef3c12f28e17a976b92bdddf28846e10962aa37f039d1736ff893d53c88a6405",
+          "withoutMetadata": "6784c9bdde3ddff1c688b77760f8abee60b5ea4939b980505024050460e92688",
+          "linkedWithoutMetadata": "6784c9bdde3ddff1c688b77760f8abee60b5ea4939b980505024050460e92688"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "SaleKindInterface": {
+        "src": "contracts\\SaleKindInterface.sol:5",
+        "version": {
+          "withMetadata": "4b7a0f1c162d2c5e7a5c460bd2582b8273551944324a8bac55f5ed0758e53a08",
+          "withoutMetadata": "6784c9bdde3ddff1c688b77760f8abee60b5ea4939b980505024050460e92688",
+          "linkedWithoutMetadata": "6784c9bdde3ddff1c688b77760f8abee60b5ea4939b980505024050460e92688"
+        },
+        "inherit": [],
+        "libraries": [
+          "SafeMath"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "TokenRecipient": {
+        "src": "contracts\\TokenRecipient.sol:5",
+        "version": {
+          "withMetadata": "228483af7b453f4057ddc879124824a79b3c70bb88f3ef993332fa92ed635f57",
+          "withoutMetadata": "480167b026cb95d580eed22ae0256d022433e9a44ffa54ee9996880a14820be3",
+          "linkedWithoutMetadata": "480167b026cb95d580eed22ae0256d022433e9a44ffa54ee9996880a14820be3"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "receiveApproval(address,uint256,address,bytes)",
+          "()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "TokenTransferProxy": {
+        "src": "contracts\\TokenTransferProxy.sol:6",
+        "version": {
+          "withMetadata": "5b04e66c2287e394b7b3ad69295d567264f66027edcf60e7d102a2b099d396c9",
+          "withoutMetadata": "6717d800ed14486294bca0185b31a63556e4f745d5b251b013e3a566f606a431",
+          "linkedWithoutMetadata": "6717d800ed14486294bca0185b31a63556e4f745d5b251b013e3a566f606a431"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "transferFrom(address,address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [
+            {
+              "contract": "TokenTransferProxy",
+              "label": "registry",
+              "type": "t_contract(ProxyRegistry)4545",
+              "src": "contracts\\TokenTransferProxy.sol:9"
+            }
+          ],
+          "types": {
+            "t_contract(ProxyRegistry)4545": {
+              "label": "contract ProxyRegistry"
+            }
+          },
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      },
+      "WyvernExchangeWithBulkCancellations": {
+        "src": "contracts\\WyvernExchangeWithBulkCancellations.sol:5",
+        "version": {
+          "withMetadata": "3786dfb39c3fadcddb9f210cc0a0de613bafe428d4c22c8b2765f63548f2d952",
+          "withoutMetadata": "3786dfb39c3fadcddb9f210cc0a0de613bafe428d4c22c8b2765f63548f2d952",
+          "linkedWithoutMetadata": "3786dfb39c3fadcddb9f210cc0a0de613bafe428d4c22c8b2765f63548f2d952"
+        },
+        "inherit": [
+          "Exchange",
+          "ExchangeCore",
+          "Ownable",
+          "ReentrancyGuarded"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address,address,address)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1",
+          "flat": false
+        }
+      }
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+}

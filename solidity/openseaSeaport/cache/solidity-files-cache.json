@@ -1,0 +1,798 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\ArrayUtils.sol": {
+      "lastModificationDate": 1653376606882,
+      "contentHash": "7cc8b0efc5232f3acd07769ba05f8242",
+      "sourceName": "contracts/ArrayUtils.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "ArrayUtils"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\ExchangeCore.sol": {
+      "lastModificationDate": 1653379772649,
+      "contentHash": "9f5e80806cd63010f2425bee6e57d747",
+      "sourceName": "contracts/ExchangeCore.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ArrayUtils.sol",
+        "./ReentrancyGuarded.sol",
+        "./SaleKindInterface.sol",
+        "./TokenTransferProxy.sol",
+        "./AuthenticatedProxy.sol",
+        "./ProxyRegistry.sol",
+        "./Ownable.sol",
+        "./ERC20.sol"
+      ],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "ExchangeCore"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\ReentrancyGuarded.sol": {
+      "lastModificationDate": 1653376631800,
+      "contentHash": "fcf9cf937b73ba71699de53f40ba33af",
+      "sourceName": "contracts/ReentrancyGuarded.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "ReentrancyGuarded"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\SaleKindInterface.sol": {
+      "lastModificationDate": 1653379710560,
+      "contentHash": "d1781df647bde6b972fc4deca1fb72c6",
+      "sourceName": "contracts/SaleKindInterface.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./SafeMath.sol"
+      ],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "SaleKindInterface"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\TokenTransferProxy.sol": {
+      "lastModificationDate": 1653378135289,
+      "contentHash": "67da10913451bf59ce13eaad553dce78",
+      "sourceName": "contracts/TokenTransferProxy.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ProxyRegistry.sol",
+        "./ERC20.sol"
+      ],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "TokenTransferProxy"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\AuthenticatedProxy.sol": {
+      "lastModificationDate": 1653377343688,
+      "contentHash": "a4206f5aaaeef1b2a600de3174174b13",
+      "sourceName": "contracts/AuthenticatedProxy.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ProxyRegistry.sol",
+        "./TokenRecipient.sol",
+        "./OwnedUpgradeabilityStorage.sol"
+      ],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "AuthenticatedProxy"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\ProxyRegistry.sol": {
+      "lastModificationDate": 1653377663417,
+      "contentHash": "6e52a429609b7dafd373cb9348a14e32",
+      "sourceName": "contracts/ProxyRegistry.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./Ownable.sol",
+        "./OwnableDelegateProxy.sol"
+      ],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "ProxyRegistry"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\Ownable.sol": {
+      "lastModificationDate": 1653376483814,
+      "contentHash": "ead612ba9262f03162d1ab3f503220fd",
+      "sourceName": "contracts/Ownable.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "Ownable"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\ERC20.sol": {
+      "lastModificationDate": 1653376559293,
+      "contentHash": "cba93ca1ae6faedacae1a661a1dafe93",
+      "sourceName": "contracts/ERC20.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ERC20Basic.sol"
+      ],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "ERC20"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\SafeMath.sol": {
+      "lastModificationDate": 1653376334275,
+      "contentHash": "d4753993cc504362b3a209fcd015f976",
+      "sourceName": "contracts/SafeMath.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "SafeMath"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\OwnableDelegateProxy.sol": {
+      "lastModificationDate": 1653377686980,
+      "contentHash": "38f5f656cc22b9e144d964382bb56687",
+      "sourceName": "contracts/OwnableDelegateProxy.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./OwnedUpgradeabilityProxy.sol"
+      ],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "OwnableDelegateProxy"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\OwnedUpgradeabilityProxy.sol": {
+      "lastModificationDate": 1653377723024,
+      "contentHash": "36a0d11005c439a8427462b22a1529bc",
+      "sourceName": "contracts/OwnedUpgradeabilityProxy.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./Proxy.sol",
+        "./OwnedUpgradeabilityStorage.sol"
+      ],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "OwnedUpgradeabilityProxy"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\Proxy.sol": {
+      "lastModificationDate": 1653377222946,
+      "contentHash": "57dca23afe532af43157b981e33d1756",
+      "sourceName": "contracts/Proxy.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "Proxy"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\OwnedUpgradeabilityStorage.sol": {
+      "lastModificationDate": 1653377218252,
+      "contentHash": "fa8bd5a0ef6d02ba23662eed41b5b403",
+      "sourceName": "contracts/OwnedUpgradeabilityStorage.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "OwnedUpgradeabilityStorage"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\ERC20Basic.sol": {
+      "lastModificationDate": 1653376513229,
+      "contentHash": "2635031f16b6e7b48eec46fc5e5d010d",
+      "sourceName": "contracts/ERC20Basic.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "ERC20Basic"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\TokenRecipient.sol": {
+      "lastModificationDate": 1653377747827,
+      "contentHash": "89152f2206960d67823ad04ebd60017b",
+      "sourceName": "contracts/TokenRecipient.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ERC20.sol"
+      ],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "TokenRecipient"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\Exchange.sol": {
+      "lastModificationDate": 1653377774013,
+      "contentHash": "d2454352c8afee9f8dbc0667042ae72d",
+      "sourceName": "contracts/Exchange.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ExchangeCore.sol"
+      ],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "Exchange"
+      ]
+    },
+    "F:\\codes\\github\\ethereum-learn\\solidity\\opensea\\contracts\\WyvernExchangeWithBulkCancellations.sol": {
+      "lastModificationDate": 1653379831210,
+      "contentHash": "642f73ecd59d57e1200c123295b233f8",
+      "sourceName": "contracts/WyvernExchangeWithBulkCancellations.sol",
+      "solcConfig": {
+        "version": "0.4.26",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout",
+                "devdoc",
+                "userdoc",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ERC20.sol",
+        "./TokenTransferProxy.sol",
+        "./ProxyRegistry.sol",
+        "./Exchange.sol"
+      ],
+      "versionPragmas": [
+        "0.4.26"
+      ],
+      "artifacts": [
+        "WyvernExchangeWithBulkCancellations"
+      ]
+    }
+  }
+}
