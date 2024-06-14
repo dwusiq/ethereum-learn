@@ -56,6 +56,51 @@ contract TokenTransferBatch is Ownable(msg.sender), ReentrancyGuard {
     }
 
     /**
+     * @notice Transfer a specified number of tokens to the user list
+     * @param _token Token address
+     * @param _amounts The amount transfer to the user list
+     * @param _users Transfer tokens to these user wallets
+     */
+    function batchTransfer(
+        address _token,
+        address[] memory _users,
+        uint256[] memory _amounts
+    ) external nonReentrant {
+        require(_users.length > 0, "Users empty");
+        for (uint256 i = 0; i < _users.length; i++) {
+            TransferHelper.safeTransferFrom(
+                _token,
+                msg.sender,
+                _users[i],
+                _amounts[i]
+            );
+        }
+    }
+
+    /**
+     * @notice Transfer a specified number of tokens to the user list
+     * @param _token Token address
+     * @param _amount The amount transfer to the user list
+     * @param _users Transfer tokens to these user wallets
+     */
+    function batchTransferSameAmount(
+        address _token,
+        uint256 _amount,
+        address[] memory _users
+    ) external nonReentrant {
+        require(_users.length > 0, "users empty");
+        require(_amount > 0, "check amount");
+        for (uint256 i = 0; i < _users.length; i++) {
+            TransferHelper.safeTransferFrom(
+                _token,
+                msg.sender,
+                _users[i],
+                _amount
+            );
+        }
+    }
+
+    /**
      * @notice Transfer a specified number of tokens from the user list
      * @param _token Token address
      * @param _amounts The amount corresponding to the user list

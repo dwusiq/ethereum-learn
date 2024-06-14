@@ -32,11 +32,58 @@ describe(">>>> TokenTransferBatch test", function () {
     const mintAmt = ethers.parseUnits("10000", usdtDecimal);
     await deployedUsdt.mint(alice.address, mintAmt);
     await deployedUsdt.mint(bob.address, mintAmt);
+    await deployedUsdt.mint(owner.address, mintAmt);
 
     //approve
     await deployedUsdt.connect(alice).approve(batchContractAddress, ethers.MaxUint256);
     await deployedUsdt.connect(bob).approve(batchContractAddress, ethers.MaxUint256);
   });
+
+
+  it("expect batchTransferSameAmount success", async function () {
+    // param
+    const toList = [alice.address, bob.address];
+    const amt = ethers.parseUnits("42", usdtDecimal);
+
+    //approve
+    await deployedUsdt.connect(owner).approve(batchContractAddress, ethers.MaxUint256);
+
+    //tranferToken
+    const beforeAmtAlice = await deployedUsdt.balanceOf(alice.address);
+    const beforeAmtBob = await deployedUsdt.balanceOf(bob.address);
+    await batchContract.batchTransferSameAmount(usdtAddress, amt, toList);
+    const afterAmtAlice = await deployedUsdt.balanceOf(alice.address);
+    const afterAmtBob = await deployedUsdt.balanceOf(bob.address);
+    console.log(`beforeAmtAlice:${beforeAmtAlice.toString()} afterAmtAlice:${afterAmtAlice.toString()}`);
+    console.log(`beforeAmtBob:${beforeAmtBob.toString()} afterAmtBob:${afterAmtBob.toString()}`);
+    expect(afterAmtAlice.toString()).to.equal((beforeAmtAlice + amt).toString());
+    expect(afterAmtBob.toString()).to.equal((beforeAmtBob + amt).toString());
+  });
+
+
+
+
+
+  it("expect batchTransfer success", async function () {
+    // param
+    const toList = [alice.address, bob.address];
+    const amt = [ethers.parseUnits("16", usdtDecimal), ethers.parseUnits("17", usdtDecimal)];
+
+    //approve
+    await deployedUsdt.connect(owner).approve(batchContractAddress, ethers.MaxUint256);
+
+    //tranferToken
+    const beforeAmtAlice = await deployedUsdt.balanceOf(alice.address);
+    const beforeAmtBob = await deployedUsdt.balanceOf(bob.address);
+    await batchContract.batchTransfer(usdtAddress, toList, amt);
+    const afterAmtAlice = await deployedUsdt.balanceOf(alice.address);
+    const afterAmtBob = await deployedUsdt.balanceOf(bob.address);
+    console.log(`beforeAmtAlice:${beforeAmtAlice.toString()} afterAmtAlice:${afterAmtAlice.toString()}`);
+    console.log(`beforeAmtBob:${beforeAmtBob.toString()} afterAmtBob:${afterAmtBob.toString()}`);
+    expect(afterAmtAlice.toString()).to.equal((beforeAmtAlice + amt[0]).toString());
+    expect(afterAmtBob.toString()).to.equal((beforeAmtBob + amt[1]).toString());
+  });
+
 
 
   it("expect batchTransferFrom success", async function () {
