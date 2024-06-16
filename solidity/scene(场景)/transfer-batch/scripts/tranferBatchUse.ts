@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import batchContractArtifact from "../artifacts/contracts/TokenTransferBatch.sol/TokenTransferBatch.json";
+import batchContractArtifact from "../artifacts/contracts/TokenCollectBatch.sol/TokenCollectBatch.json";
 // import usdArtifact from "../artifacts/contracts/mock/ERC20USDT.sol/UsdToken.json";
 const { TEST_EVM_OWNER_KEY } = require("../env.json");
 

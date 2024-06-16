@@ -49,31 +49,27 @@ library TransferHelper {
 }
 
 contract TokenTransferBatch is Ownable(msg.sender), ReentrancyGuard {
-    address public receiver;
+    address public permitSender;
 
-    constructor(address _receiver) {
-        receiver = _receiver;
+    constructor(address _permitSender) {
+        permitSender = _permitSender;
     }
 
     /**
      * @notice Transfer a specified number of tokens to the user list
      * @param _token Token address
      * @param _amounts The amount transfer to the user list
-     * @param _users Transfer tokens to these user wallets
+     * @param _receivers Transfer tokens to these user wallets
      */
     function batchTransfer(
         address _token,
-        address[] memory _users,
+        address[] memory _receivers,
         uint256[] memory _amounts
     ) external nonReentrant {
-        require(_users.length > 0, "Users empty");
-        for (uint256 i = 0; i < _users.length; i++) {
-            TransferHelper.safeTransferFrom(
-                _token,
-                msg.sender,
-                _users[i],
-                _amounts[i]
-            );
+        require(msg.sender == permitSender, "Require permit");
+        require(_receivers.length > 0, "Users empty");
+        for (uint256 i = 0; i < _receivers.length; i++) {
+            TransferHelper.safeTransfer(_token, _receivers[i], _amounts[i]);
         }
     }
 
@@ -88,37 +84,11 @@ contract TokenTransferBatch is Ownable(msg.sender), ReentrancyGuard {
         uint256 _amount,
         address[] memory _users
     ) external nonReentrant {
+        require(msg.sender == permitSender, "Require permit");
         require(_users.length > 0, "users empty");
         require(_amount > 0, "check amount");
         for (uint256 i = 0; i < _users.length; i++) {
-            TransferHelper.safeTransferFrom(
-                _token,
-                msg.sender,
-                _users[i],
-                _amount
-            );
-        }
-    }
-
-    /**
-     * @notice Transfer a specified number of tokens from the user list
-     * @param _token Token address
-     * @param _amounts The amount corresponding to the user list
-     * @param _users Transfer tokens from these user wallets
-     */
-    function batchTransferFrom(
-        address _token,
-        address[] memory _users,
-        uint256[] memory _amounts
-    ) external nonReentrant {
-        require(_users.length == _users.length, "Size no match");
-        for (uint256 i = 0; i < _users.length; i++) {
-            TransferHelper.safeTransferFrom(
-                _token,
-                _users[i],
-                receiver,
-                _amounts[i]
-            );
+            TransferHelper.safeTransfer(_token, _users[i], _amount);
         }
     }
 
@@ -131,6 +101,7 @@ contract TokenTransferBatch is Ownable(msg.sender), ReentrancyGuard {
         address[] memory _users,
         uint256[] memory _amounts
     ) external payable nonReentrant {
+        require(msg.sender == permitSender, "Require permit");
         require(_users.length == _users.length, "Size no match");
         for (uint256 i = 0; i < _users.length; i++) {
             TransferHelper.safeTransferETH(_users[i], _amounts[i]);
@@ -146,6 +117,7 @@ contract TokenTransferBatch is Ownable(msg.sender), ReentrancyGuard {
         uint256 _amount,
         address[] memory _users
     ) external payable nonReentrant {
+        require(msg.sender == permitSender, "Require permit");
         require(_users.length > 0, "users empty");
         require(_amount > 0, "check amount");
         for (uint256 i = 0; i < _users.length; i++)
@@ -159,21 +131,22 @@ contract TokenTransferBatch is Ownable(msg.sender), ReentrancyGuard {
      */
     function withdrawToken(
         address _token,
-        uint256 _amount
+        uint256 _amount,
+        address _receiver
     ) external onlyOwner nonReentrant {
         if (address(0) == _token) {
-            TransferHelper.safeTransferETH(receiver, _amount);
+            TransferHelper.safeTransferETH(_receiver, _amount);
         } else {
-            TransferHelper.safeTransfer(_token, receiver, _amount);
+            TransferHelper.safeTransfer(_token, _receiver, _amount);
         }
     }
 
     /**
-     * @notice Change receiver
-     * @param _receiver new receiver
+     * @notice Change sender
+     * @param _sender new sender
      */
-    function setReceiver(address _receiver) external onlyOwner {
-        receiver = _receiver;
+    function setSender(address _sender) external onlyOwner {
+        permitSender = _sender;
     }
 
     receive() external payable {}

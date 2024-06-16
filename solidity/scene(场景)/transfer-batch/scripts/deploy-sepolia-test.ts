@@ -20,7 +20,7 @@ async function deployContracts() {
   usdtAddress = deployedUsdt.target;
 
   //deploy multiSignWallet
-  batchContract = await deployContract("TokenTransferBatch", [receiverAddress], deployer);
+  batchContract = await deployContract("TokenCollectBatch", [receiverAddress], deployer);
   batchContractAddress = batchContract.target;
 };
 
