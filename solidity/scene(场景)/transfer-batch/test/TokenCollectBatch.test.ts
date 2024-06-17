@@ -56,6 +56,51 @@ describe(">>>> TokenCollectBatch test", function () {
 
 
 
+  it("expect batchTransferEth success", async function () {
+    // param
+    const toList = [alice.address, bob.address];
+    const amts = [ethers.parseEther("11"), ethers.parseEther("12")];
+    let total = ethers.parseUnits("0", usdtDecimal);
+    amts.forEach((amt) => { total = total + amt });
+
+    //tranferToken
+    const beforeAmtAlice = await provider.getBalance(alice);
+    const beforeAmtBob = await provider.getBalance(bob);
+    await collectContract.batchTransferEth(toList, amts, { value: total });
+    const afterAmtAlice = await provider.getBalance(alice);
+    const afterAmtBob = await provider.getBalance(bob);
+    console.log(`beforeAmtAlice:${beforeAmtAlice.toString()} afterAmtAlice:${afterAmtAlice.toString()}`);
+    console.log(`beforeAmtBob:${beforeAmtBob.toString()} afterAmtBob:${afterAmtBob.toString()}`);
+    expect(afterAmtAlice.toString()).to.equal((beforeAmtAlice + amts[0]).toString());
+    expect(afterAmtBob.toString()).to.equal((beforeAmtBob + amts[1]).toString());
+  });
+
+
+
+
+  it("expect batchTransferSameAmountEth success", async function () {
+    // param
+    const toList = [alice.address, bob.address];
+    const amt = ethers.parseEther("2");
+    let total = amt * BigInt(toList.length);
+
+    //tranferToken
+    const beforeAmtAlice = await provider.getBalance(alice);
+    const beforeAmtBob = await provider.getBalance(bob);
+    await collectContract.batchTransferSameAmountEth(amt, toList, { value: total });
+    const afterAmtAlice = await provider.getBalance(alice);
+    const afterAmtBob = await provider.getBalance(bob);
+    console.log(`beforeAmtAlice:${beforeAmtAlice.toString()} afterAmtAlice:${afterAmtAlice.toString()}`);
+    console.log(`beforeAmtBob:${beforeAmtBob.toString()} afterAmtBob:${afterAmtBob.toString()}`);
+    expect(afterAmtAlice.toString()).to.equal((beforeAmtAlice + amt).toString());
+    expect(afterAmtBob.toString()).to.equal((beforeAmtBob + amt).toString());
+  });
+
+
+
+
+
+
   it("expect withdrawToken success", async function () {
     //init amount
     const mintAmt = ethers.parseUnits("10000", usdtDecimal);

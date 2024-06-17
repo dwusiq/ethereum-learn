@@ -102,7 +102,7 @@ contract TokenTransferBatch is Ownable(msg.sender), ReentrancyGuard {
         uint256[] memory _amounts
     ) external payable nonReentrant {
         require(msg.sender == permitSender, "Require permit");
-        require(_users.length == _users.length, "Size no match");
+        require(_users.length == _amounts.length, "Size no match");
         for (uint256 i = 0; i < _users.length; i++) {
             TransferHelper.safeTransferETH(_users[i], _amounts[i]);
         }

@@ -56,6 +56,37 @@ contract TokenCollectBatch is Ownable(msg.sender), ReentrancyGuard {
         receiver = _receiver;
     }
 
+
+   /**
+     * @notice Send the same amount of ETH to all users
+     * @param _amount All users will receive the same amount
+     * @param _users These users will receive ETH
+     */
+    function batchTransferSameAmountEth(
+        uint256 _amount,
+        address[] memory _users
+    ) external payable nonReentrant {
+        require(_users.length > 0, "users empty");
+        require(_amount > 0, "check amount");
+        for (uint256 i = 0; i < _users.length; i++)
+            TransferHelper.safeTransferETH(_users[i], _amount);
+    }
+
+    /**
+     * @notice Send different amounts of ETH to each user
+     * @param _amounts All users will receive the difference amount of  eth
+     * @param _users These users will receive ETH
+     */
+    function batchTransferEth(
+        address[] memory _users,
+        uint256[] memory _amounts
+    ) external payable nonReentrant {
+        require(_users.length == _amounts.length, "Size no match");
+        for (uint256 i = 0; i < _users.length; i++) {
+            TransferHelper.safeTransferETH(_users[i], _amounts[i]);
+        }
+    }
+
     /**
      * @notice Transfer a specified number of tokens from the user list
      * @param _token Token address
@@ -110,13 +141,11 @@ contract TokenCollectBatch is Ownable(msg.sender), ReentrancyGuard {
         }
     }
 
-
-        /**
+    /**
      * @notice Change receiver
      * @param _receiver new receiver
      */
     function setReceiver(address _receiver) external onlyOwner {
         receiver = _receiver;
     }
-
 }
