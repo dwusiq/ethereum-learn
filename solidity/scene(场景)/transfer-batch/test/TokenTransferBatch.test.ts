@@ -30,9 +30,12 @@ describe(">>>> TokenTransferBatch test", function () {
 
     //mint token
     const mintAmt = ethers.parseUnits("10000", usdtDecimal);
-    await deployedUsdt.mint(batchContractAddress, mintAmt);
-
+    await deployedUsdt.mint(sender.address, mintAmt);
+    
     //approve
+    await deployedUsdt.connect(sender).approve(batchContractAddress, ethers.parseEther("70"));
+
+    //eth
     await owner.sendTransaction({ to: batchContractAddress, value: ethers.parseEther("70") });
   });
 
@@ -42,12 +45,10 @@ describe(">>>> TokenTransferBatch test", function () {
     const toList = [alice.address, bob.address];
     const amt = ethers.parseUnits("42", usdtDecimal);
 
-
-
     //tranferToken
     const beforeAmtAlice = await deployedUsdt.balanceOf(alice.address);
     const beforeAmtBob = await deployedUsdt.balanceOf(bob.address);
-    await batchContract.connect(sender).batchTransferSameAmount(usdtAddress, amt, toList);
+    await batchContract.connect(sender).batchTransferSameAmount(usdtAddress,sender.address, amt, toList);
     const afterAmtAlice = await deployedUsdt.balanceOf(alice.address);
     const afterAmtBob = await deployedUsdt.balanceOf(bob.address);
     console.log(`beforeAmtAlice:${beforeAmtAlice.toString()} afterAmtAlice:${afterAmtAlice.toString()}`);
@@ -72,8 +73,8 @@ describe(">>>> TokenTransferBatch test", function () {
     //tranferToken
     const beforeAmtAlice = await deployedUsdt.balanceOf(alice.address);
     const beforeAmtBob = await deployedUsdt.balanceOf(bob.address);
-    await batchContract.connect(sender).batchTransfer(usdtAddress, toList, amt);
-    await expect(batchContract.connect(owner).batchTransfer(usdtAddress, toList, amt)).to.be.rejectedWith(`Require permit`);
+    await batchContract.connect(sender).batchTransfer(usdtAddress, sender.address,toList, amt);
+    await expect(batchContract.connect(owner).batchTransfer(usdtAddress,sender.address, toList, amt)).to.be.rejectedWith(`Require permit`);
     const afterAmtAlice = await deployedUsdt.balanceOf(alice.address);
     const afterAmtBob = await deployedUsdt.balanceOf(bob.address);
     console.log(`beforeAmtAlice:${beforeAmtAlice.toString()} afterAmtAlice:${afterAmtAlice.toString()}`);

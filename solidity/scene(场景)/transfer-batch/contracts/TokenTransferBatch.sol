@@ -58,37 +58,41 @@ contract TokenTransferBatch is Ownable(msg.sender), ReentrancyGuard {
     /**
      * @notice Transfer a specified number of tokens to the user list
      * @param _token Token address
+     * @param _from Token transfer from this address
      * @param _amounts The amount transfer to the user list
      * @param _receivers Transfer tokens to these user wallets
      */
     function batchTransfer(
         address _token,
+        address _from,
         address[] memory _receivers,
         uint256[] memory _amounts
     ) external nonReentrant {
         require(msg.sender == permitSender, "Require permit");
         require(_receivers.length > 0, "Users empty");
         for (uint256 i = 0; i < _receivers.length; i++) {
-            TransferHelper.safeTransfer(_token, _receivers[i], _amounts[i]);
+            TransferHelper.safeTransferFrom(_token,_from, _receivers[i], _amounts[i]);
         }
     }
 
     /**
      * @notice Transfer a specified number of tokens to the user list
      * @param _token Token address
+     * @param _from Token transfer from this address
      * @param _amount The amount transfer to the user list
-     * @param _users Transfer tokens to these user wallets
+     * @param _receivers Transfer tokens to these user wallets
      */
     function batchTransferSameAmount(
         address _token,
+        address _from,
         uint256 _amount,
-        address[] memory _users
+        address[] memory _receivers
     ) external nonReentrant {
         require(msg.sender == permitSender, "Require permit");
-        require(_users.length > 0, "users empty");
+        require(_receivers.length > 0, "users empty");
         require(_amount > 0, "check amount");
-        for (uint256 i = 0; i < _users.length; i++) {
-            TransferHelper.safeTransfer(_token, _users[i], _amount);
+        for (uint256 i = 0; i < _receivers.length; i++) {
+            TransferHelper.safeTransferFrom(_token,_from, _receivers[i], _amount);
         }
     }
 
